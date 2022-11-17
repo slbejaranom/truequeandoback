@@ -5,9 +5,7 @@ import lombok.Data;
 @Data
 public abstract class Notificacion {
 
-    public abstract void notificar(){
-        
-    }
+    public abstract void notificar();
 
     private long id;
     private Date fecha;
