@@ -3,9 +3,9 @@ package ingsoft.truequeandoback.domain;
 import lombok.Data;
 
 @Data
-public class Notificacion {
+public abstract class Notificacion {
 
-    public void notificar(){
+    public abstract void notificar(){
         
     }
 
