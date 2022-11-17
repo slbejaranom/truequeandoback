@@ -11,5 +11,5 @@ public class Cliente extends Usuario {
     private String departamento;
     private String direccion;
     private String municipio;
-    private List<Elemento> listaElementos = Arrays.asList(Elemento);
+    private List<Elemento> listaElementos;
 }
