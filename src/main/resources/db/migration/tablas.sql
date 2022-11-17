@@ -26,6 +26,9 @@ CREATE TABLE operadores_logisticos (
 	nit integer NOT NULL,
 	email varchar (200) NOT NULL,
 	contraseña varchar (50) NOT NULL
+	precioPorKilometro Real NOT NULL, 
+	precioPorKilogramo Real NOT NULL,
+	precioPorMetroCubico Real NOT NULL
 	);
 
 CREATE TABLE administradores (
