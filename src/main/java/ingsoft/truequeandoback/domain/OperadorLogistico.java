@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class OperadorLogistico extends Usuario {
-    private Real precioKilogramo;
-    private Real precioKilometro;
-    private Real precioMetroCubico;
+    private float precioKilogramo;
+    private float precioKilometro;
+    private float precioMetroCubico;
 }

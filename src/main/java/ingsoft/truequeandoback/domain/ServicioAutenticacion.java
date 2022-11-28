@@ -1,22 +1,19 @@
 package ingsoft.truequeandoback.domain;
 
-import ingsoft.truequeandoback.domain.AutenticacionDTO;
-import ingsoft.truequeandoback.domain.TokenDTO;
-import ingsoft.truequeandoback.domain.Usuario;
 import lombok.Data;
 
 @Data
 public class ServicioAutenticacion {
-    public AutenticacionDTO autenticar(Usuario){
+    /*public AutenticacionDTO autenticar(Usuario usuario){
 
     }
-    public void cancelarToken(TokenDTO) {
+    public void cancelarToken(TokenDTO tokenDTO) {
         
     }
-    public boolean verificarAcceso(TokenDTO) {
+    public boolean verificarAcceso(TokenDTO tokenDTO) {
         
     }
-    public boolean verificarTokenActivo(TokenDTO) {
+    public boolean verificarTokenActivo(TokenDTO tokenDTO) {
         
-    }
+    }*/
 }

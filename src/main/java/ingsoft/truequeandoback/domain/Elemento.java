@@ -4,20 +4,19 @@ import lombok.Data;
 
 @Data
 public class Elemento {
-    
 
-    public Real calcularVolumen(){
+    public float calcularVolumen(){
         return this.altura*this.anchura*this.longitud;
     }
 
     private  long id;
-    private Real altura;
-    private Real anchura;
-    private Real longitud;
+    private float altura;
+    private float anchura;
+    private float longitud;
     private int categoria;
     private boolean estado;
     private String nombre;
-    private Real peso;
-    private Real valor;
+    private float peso;
+    private float valor;
     private Cliente cliente;
 }

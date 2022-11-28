@@ -2,6 +2,8 @@ package ingsoft.truequeandoback.domain;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public abstract class Notificacion {
 
