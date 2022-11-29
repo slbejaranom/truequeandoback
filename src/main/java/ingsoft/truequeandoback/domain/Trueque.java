@@ -13,3 +13,4 @@ public class Trueque {
     private OperadorLogistico transportador;
     
 }
+
