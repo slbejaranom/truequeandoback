@@ -3,6 +3,7 @@ package ingsoft.truequeandoback.domain;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
@@ -14,6 +15,5 @@ public class NotificacionTrueque extends Notificacion {
     public void notificar(){
         
     }
-
     private Trueque trueque;
 }
