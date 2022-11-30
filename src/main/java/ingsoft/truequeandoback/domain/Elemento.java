@@ -2,6 +2,8 @@ package ingsoft.truequeandoback.domain;
 
 import lombok.Data;
 
+import javax.persistence.Id;
+
 @Data
 public class Elemento {
 
@@ -9,6 +11,7 @@ public class Elemento {
         return this.altura*this.anchura*this.longitud;
     }
 
+    @Id
     private  long id;
     private float altura;
     private float anchura;
