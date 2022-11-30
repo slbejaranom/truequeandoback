@@ -2,9 +2,13 @@ package ingsoft.truequeandoback.domain;
 
 import lombok.Data;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Data
+@Entity
+@Table(name="elemento")
 public class Elemento {
 
     public float calcularVolumen(){
