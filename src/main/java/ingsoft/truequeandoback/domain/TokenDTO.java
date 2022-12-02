@@ -11,6 +11,11 @@ public class TokenDTO {
     private long id;
 
     private boolean activo;
+    private String valorToken;
     private int tiempoExpiracion;
     private long timestampGenetacion;
+
+    public static TokenDTO generarTokenDto(Usuario usuario){
+        //valorToken = nombreUsuario:rol:timeStamp;
+    }
 }
