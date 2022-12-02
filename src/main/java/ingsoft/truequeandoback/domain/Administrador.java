@@ -5,5 +5,6 @@ import lombok.Data;
 
 @Data
 public class Administrador extends Usuario {
+    private int nit;
     
 }

@@ -47,4 +47,10 @@ public class ServicioAutenticacion {
     public boolean verificarTokenActivo(TokenDTO tokenDTO) {
         
     }
+
+    public Usuario registrar(Usuario usuario){
+        // Me entra un usuario sin Id
+        // SI el usuario existe, es por email, es por que ya esta registrado y no se puede repetir
+        // Si no existe me crea un usuario que es guardar el usuario en la base de datos con el save User
+    }
 }
