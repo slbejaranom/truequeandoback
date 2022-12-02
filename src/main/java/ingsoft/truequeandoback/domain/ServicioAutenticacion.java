@@ -52,5 +52,14 @@ public class ServicioAutenticacion {
         // Me entra un usuario sin Id
         // SI el usuario existe, es por email, es por que ya esta registrado y no se puede repetir
         // Si no existe me crea un usuario que es guardar el usuario en la base de datos con el save User
+        Optional<Usuario> usuarioRegister = usuarioRepository.getByEmail(usuario.getEmail());
+        AutenticacionDTO autenticacionDTO = new AutenticacionDTO();
+        if  (usuario.isPresent()){
+            Usuario usuarioLogin = usuario.get();
+            autenticacionDTO.setErrorMessage("Usuario ya existe");
+
+        }else {
+            usuarioRepository.save(usuario);
+        }
     }
 }
