@@ -5,15 +5,18 @@ import ingsoft.truequeandoback.repository.UsuarioRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 
+import java.util.Date;
 import java.util.Optional;
 
 @Data
 @RequiredArgsConstructor
+@Service
 public class ServicioAutenticacion {
     @Value("${token.expiration-time}")
-    private final int timeExpiration;
+    private int timeExpiration;
     private final UsuarioRepository usuarioRepository;
     private final TokenRepository tokenRepository;
     public AutenticacionDTO autenticar(String email, String password){
@@ -22,11 +25,11 @@ public class ServicioAutenticacion {
         if  (usuario.isPresent()){
             Usuario usuarioLogin = usuario.get();
             if (usuarioLogin.getPassword() == password){
-                TokenDTO token =  TokenDTO.generarTokenDto(usuarioLogin);
+                TokenDTO token =  generarTokenDto(usuarioLogin);
+                token.setTiempoExpiracion(timeExpiration);
                 tokenRepository.save(token);
                 autenticacionDTO.setToken(token.getValorToken());
-                autenticacionDTO.setExpiresln(timeExpiration);
-                autenticacionDTO.setErrorMessage("");
+                autenticacionDTO.setExpiresln(token.getTiempoExpiracion());
             }
             else{
                 // contraseña incorrecta
@@ -38,7 +41,7 @@ public class ServicioAutenticacion {
         }
         return autenticacionDTO;
     }
-    public void cancelarToken(TokenDTO tokenDTO) {
+    /*public void cancelarToken(TokenDTO tokenDTO) {
         
     }
     public boolean verificarAcceso(TokenDTO tokenDTO) {
@@ -46,7 +49,7 @@ public class ServicioAutenticacion {
     }
     public boolean verificarTokenActivo(TokenDTO tokenDTO) {
         
-    }
+    }*/
 
     public AutenticacionDTO registrar(Usuario usuario){
         // Me entra un usuario sin Id
@@ -61,5 +64,13 @@ public class ServicioAutenticacion {
             autenticacionDTO.setErrorMessage("El usuario ha sido registrado exitosamente");
         }
         return autenticacionDTO;
+    }
+
+    private TokenDTO generarTokenDto(Usuario usuario){
+        // Usuario.email:ROL:Timestamp
+        TokenDTO tokenDTO = new TokenDTO();
+        tokenDTO.setId(1234);
+        tokenDTO.setValorToken(usuario.getEmail()+":"+new Date().getTime());
+        return  tokenDTO;
     }
 }
