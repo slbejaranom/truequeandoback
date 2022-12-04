@@ -1,79 +1,59 @@
 CREATE TABLE IF NOT EXISTS usuarios (
-	id_usuario integer PRIMARY KEY,
-	nombre_usuario varchar (100) NOT NULL,
-	email varchar (200) NOT NULL,
-	contraseña varchar (50) NOT NULL,
-	ubicacion varchar (100) NOT NULL
+	id integer PRIMARY KEY,
+	nombre varchar (100) NOT NULL,
+	email varchar (200) UNIQUE NOT NULL,
+	password varchar (50) NOT NULL,
+	direccion varchar (50),
+	departamento varchar(50),
+	municipio varchar(50),
+	rol integer NOT NULL,
+	nit varchar(10),
+	precio_Kilometro Real,
+	precio_Kilogramo Real,
+	precio_Metro_Cubico Real
 	);
-	
+
 CREATE TABLE IF NOT EXISTS elementos (
-	id_elemento integer PRIMARY KEY,
-	nombre_elemento varchar(100) NOT NULL,
+	id integer PRIMARY KEY,
+	nombre varchar(100) NOT NULL,
 	categoria integer NOT NULL,
 	valor real NOT NULL,
 	estado boolean NOT NULL,
 	peso real NOT NULL,
-	alto real NOT NULL,
-	largo real NOT NULL,
-	ancho real NOT NULL,
-	id_usuario integer REFERENCES usuarios (id_usuario) NOT NULL
+	altura real NOT NULL,
+	longitud real NOT NULL,
+	anchura real NOT NULL,
+	idUsuario integer REFERENCES usuarios (id) NOT NULL
 );
 
-
-CREATE TABLE IF NOT EXISTS operadores_logisticos (
-	id_operador_logistico integer PRIMARY KEY,
-	razon_social varchar (200) NOT NULL,
-	nit integer NOT NULL,
-	email varchar (200) NOT NULL,
-	contraseña varchar (50) NOT NULL,
-	precioPorKilometro Real NOT NULL, 
-	precioPorKilogramo Real NOT NULL,
-	precioPorMetroCubico Real NOT NULL
-	);
-
-CREATE TABLE IF NOT EXISTS administradores (
-	id_administrador integer PRIMARY KEY,
-	nombre_administrador varchar (100) NOT NULL,
-	email varchar (200) NOT NULL,
-	contraseña varchar (50) NOT NULL
-	);
-	
 CREATE TABLE IF NOT EXISTS trueques (
-	id_trueque integer,
-	fecha_trueque date,
-	estado smallint NOT NULL,
-	id_usuario1 integer REFERENCES usuarios (id_usuario) NOT NULL, 
-	id_elemento1 integer REFERENCES elementos (id_elemento) NOT NULL,
-	id_usuario2 integer REFERENCES usuarios (id_usuario) NOT NULL,
-	id_elemento2 integer REFERENCES elementos (id_elemento) NOT NULL,
-	id_operador_logistico integer REFERENCES operadores_logisticos (id_operador_logistico) NOT NULL,
-	PRIMARY KEY (id_trueque, fecha_trueque)
+	id integer,
+	fecha date,
+	estado integer NOT NULL,
+	idUsuario1 integer REFERENCES usuarios (id) NOT NULL,
+	idElemento1 integer REFERENCES elementos (id) NOT NULL,
+	idUsuario2 integer REFERENCES usuarios (id) NOT NULL,
+	idElemento2 integer REFERENCES elementos (id) NOT NULL,
+	idUsuarioOL integer REFERENCES usuarios (id) NOT NULL,
+	PRIMARY KEY (id, fecha)
 	);
 
 CREATE TABLE IF NOT EXISTS tokens (
-	id_token varchar(50) PRIMARY KEY,
-	timestampGeneracion varchar (50) NOT NULL,
-	expirationTime varchar (50) NOT NULL,
-	active varchar (50) NOT NULL,
-	id_usuario integer REFERENCES usuarios (id_usuario),
-	id_administrador integer REFERENCES administradores (id_administrador),
-	id_operador_logistico integer REFERENCES operadores_logisticos (id_operador_logistico)
+	id integer PRIMARY KEY,
+	timestamp_generacion bigint NOT NULL,
+	tiempo_expiracion integer NOT NULL,
+	activo boolean NOT NULL,
+	valor_token text NOT NULL,
+	idUsuario integer REFERENCES usuarios (id)
 	);
-	
-CREATE TABLE IF NOT EXISTS notificaciones_elemento (
-	id_notificacion_elemento integer PRIMARY KEY,
-	tipo boolean NOT NULL,
+
+CREATE TABLE IF NOT EXISTS notificaciones (
+	id integer PRIMARY KEY,
+	tipo_notificacion integer NOT NULL,
+	fecha date NOT NULL,
 	mensaje varchar (200) NOT NULL,
-	id_administrador integer REFERENCES administradores (id_administrador)NOT NULL,
-	id_elemento integer REFERENCES elementos (id_elemento) NOT NULL
+	idTrueque integer,
+	fechaTrueque date,	
+	idElemento integer REFERENCES elementos (id),
+	FOREIGN KEY (id,fechaTrueque) REFERENCES trueques (id,fecha)
 );
-
-CREATE TABLE IF NOT EXISTS notificaciones_trueque (
-	id_notificacion_trueque integer PRIMARY KEY,
-	id_administrador integer REFERENCES administradores (id_administrador)NOT NULL,
-	id_trueque integer NOT NULL,
-	fecha_trueque date NOT NULL,
-	FOREIGN KEY (id_trueque, fecha_trueque) REFERENCES trueques (id_trueque, fecha_trueque)
-);
-	
-
