@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS tokens (
 	expirationTime varchar (50) NOT NULL,
 	active varchar (50) NOT NULL,
 	valorToken text NOT NULL,
-	idUsuario integer REFERENCES usuarios (idUsuario),
+	idUsuario integer REFERENCES usuarios (idUsuario)
 	);
 
 CREATE TABLE IF NOT EXISTS notificaciones (
