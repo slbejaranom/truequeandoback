@@ -12,6 +12,7 @@ import java.util.Date;
 @Table(name="tokens")
 public class TokenDTO {
 
+
     @Id
     private int id;
 
@@ -19,4 +20,6 @@ public class TokenDTO {
     private boolean activo;
     private int tiempoExpiracion;
     private long timestampGeneracion;
+
+
 }

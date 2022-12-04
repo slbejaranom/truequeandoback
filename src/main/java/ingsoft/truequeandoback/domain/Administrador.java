@@ -8,5 +8,6 @@ import javax.persistence.Table;
 @Data
 @Entity
 public class Administrador extends Usuario {
+
     
 }
