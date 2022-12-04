@@ -8,9 +8,9 @@ CREATE TABLE IF NOT EXISTS usuarios (
 	municipio varchar(50),
 	rol smallint NOT NULL,
 	nit varchar(10),
-	precioPorKilometro Real, 
-	precioPorKilogramo Real,
-	precioPorMetroCubico Real 
+	precioKilometro Real, 
+	precioKilogramo Real,
+	precioMetroCubico Real 
 	);
 
 CREATE TABLE IF NOT EXISTS elementos (
@@ -25,7 +25,6 @@ CREATE TABLE IF NOT EXISTS elementos (
 	ancho real NOT NULL,
 	idUsuario integer REFERENCES usuarios (idUsuario) NOT NULL
 );
-
 
 CREATE TABLE IF NOT EXISTS trueques (
 	idTrueque integer,
@@ -49,14 +48,12 @@ CREATE TABLE IF NOT EXISTS tokens (
 	);
 
 CREATE TABLE IF NOT EXISTS notificaciones (
-	idNotificacionElemento integer PRIMARY KEY,
-	tipo boolean NOT NULL,
+	idNotificacion integer PRIMARY KEY,
+	tipo smallint NOT NULL,
 	fecha date NOT NULL,
 	mensaje varchar (200) NOT NULL,
 	idTrueque integer,
-	fechaTrueque date,
-	fechaNotificacion date NOT NULL,
+	fechaTrueque date,	
 	idElemento integer REFERENCES elementos (idElemento),
 	FOREIGN KEY (idTrueque,fechaTrueque) REFERENCES trueques (idTrueque,fecha)
 );
-
