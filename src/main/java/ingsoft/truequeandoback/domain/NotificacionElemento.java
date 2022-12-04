@@ -2,9 +2,7 @@ package ingsoft.truequeandoback.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -13,6 +11,10 @@ public class NotificacionElemento extends Notificacion {
     public void notificar(){
 
     }
+    @ManyToOne
+    @JoinColumn(name="id", nullable = false, insertable = false, updatable = false)
     private Cliente clienteAsociado;
+    @ManyToOne
+    @JoinColumn(name="id", nullable = false, insertable = false, updatable = false)
     private Elemento elementoAsociado;
 }

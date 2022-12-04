@@ -2,6 +2,8 @@ package ingsoft.truequeandoback.domain;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class ServicioAutenticacion {
     /*public AutenticacionDTO autenticar(Usuario usuario){
@@ -14,6 +16,6 @@ public class ServicioAutenticacion {
         
     }
     public boolean verificarTokenActivo(TokenDTO tokenDTO) {
-        
+
     }*/
 }

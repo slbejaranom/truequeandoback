@@ -2,13 +2,11 @@ package ingsoft.truequeandoback.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name="elemento")
+@Table(name="elementos")
 public class Elemento {
 
     public float calcularVolumen(){
@@ -16,7 +14,7 @@ public class Elemento {
     }
 
     @Id
-    private  long id;
+    private int id;
     private float altura;
     private float anchura;
     private float longitud;
@@ -25,5 +23,7 @@ public class Elemento {
     private String nombre;
     private float peso;
     private float valor;
+    @ManyToOne
+    @JoinColumn(name="idusuario", nullable = false)
     private Cliente cliente;
 }
