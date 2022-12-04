@@ -1,59 +1,59 @@
 CREATE TABLE IF NOT EXISTS usuarios (
-	idUsuario integer PRIMARY KEY,
+	id integer PRIMARY KEY,
 	nombre varchar (100) NOT NULL,
 	email varchar (200) UNIQUE NOT NULL,
 	password varchar (50) NOT NULL,
 	direccion varchar (50),
 	departamento varchar(50),
 	municipio varchar(50),
-	rol smallint NOT NULL,
+	rol integer NOT NULL,
 	nit varchar(10),
-	precioKilometro Real, 
-	precioKilogramo Real,
-	precioMetroCubico Real 
+	precio_Kilometro Real,
+	precio_Kilogramo Real,
+	precio_Metro_Cubico Real
 	);
 
 CREATE TABLE IF NOT EXISTS elementos (
-	idElemento integer PRIMARY KEY,
+	id integer PRIMARY KEY,
 	nombre varchar(100) NOT NULL,
 	categoria integer NOT NULL,
 	valor real NOT NULL,
 	estado boolean NOT NULL,
 	peso real NOT NULL,
-	alto real NOT NULL,
-	largo real NOT NULL,
-	ancho real NOT NULL,
-	idUsuario integer REFERENCES usuarios (idUsuario) NOT NULL
+	altura real NOT NULL,
+	longitud real NOT NULL,
+	anchura real NOT NULL,
+	idUsuario integer REFERENCES usuarios (id) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS trueques (
-	idTrueque integer,
+	id integer,
 	fecha date,
-	estado smallint NOT NULL,
-	idUsuario1 integer REFERENCES usuarios (idUsuario) NOT NULL, 
-	idElemento1 integer REFERENCES elementos (idElemento) NOT NULL,
-	idUsuario2 integer REFERENCES usuarios (idUsuario) NOT NULL,
-	idElemento2 integer REFERENCES elementos (idElemento) NOT NULL,
-	idUsuarioOL integer REFERENCES usuarios (idUsuario) NOT NULL,
-	PRIMARY KEY (idTrueque, fecha)
+	estado integer NOT NULL,
+	idUsuario1 integer REFERENCES usuarios (id) NOT NULL,
+	idElemento1 integer REFERENCES elementos (id) NOT NULL,
+	idUsuario2 integer REFERENCES usuarios (id) NOT NULL,
+	idElemento2 integer REFERENCES elementos (id) NOT NULL,
+	idUsuarioOL integer REFERENCES usuarios (id) NOT NULL,
+	PRIMARY KEY (id, fecha)
 	);
 
 CREATE TABLE IF NOT EXISTS tokens (
-	idToken varchar(50) PRIMARY KEY,
-	timestampGeneracion varchar (50) NOT NULL,
-	expirationTime varchar (50) NOT NULL,
-	active varchar (50) NOT NULL,
-	valorToken text NOT NULL,
-	idUsuario integer REFERENCES usuarios (idUsuario)
+	id integer PRIMARY KEY,
+	timestamp_generacion bigint NOT NULL,
+	tiempo_expiracion integer NOT NULL,
+	activo boolean NOT NULL,
+	valor_token text NOT NULL,
+	idUsuario integer REFERENCES usuarios (id)
 	);
 
 CREATE TABLE IF NOT EXISTS notificaciones (
-	idNotificacion integer PRIMARY KEY,
-	tipo smallint NOT NULL,
+	id integer PRIMARY KEY,
+	tipo_notificacion integer NOT NULL,
 	fecha date NOT NULL,
 	mensaje varchar (200) NOT NULL,
 	idTrueque integer,
 	fechaTrueque date,	
-	idElemento integer REFERENCES elementos (idElemento),
-	FOREIGN KEY (idTrueque,fechaTrueque) REFERENCES trueques (idTrueque,fecha)
+	idElemento integer REFERENCES elementos (id),
+	FOREIGN KEY (id,fechaTrueque) REFERENCES trueques (id,fecha)
 );
