@@ -8,7 +8,6 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name="notificacion_elemento")
 public class NotificacionElemento extends Notificacion {
     @Override
     public void notificar(){
@@ -16,5 +15,4 @@ public class NotificacionElemento extends Notificacion {
     }
     private Cliente clienteAsociado;
     private Elemento elementoAsociado;
-    private int tipoNotificacion;
 }

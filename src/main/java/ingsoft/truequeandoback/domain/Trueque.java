@@ -14,7 +14,6 @@ public class Trueque {
 
     @Id
     private long id;
-
     private int estado;
     private Date fecha;
     private OperadorLogistico transportador;

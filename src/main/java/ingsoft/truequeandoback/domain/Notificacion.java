@@ -9,8 +9,7 @@ import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
 @Data
-@MappedSuperclass
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Notificacion {
 
     public abstract void notificar();
@@ -19,4 +18,5 @@ public abstract class Notificacion {
     private long id;
     private Date fecha;
     private String mensaje;
+    private int tipoNotificacion;
 }

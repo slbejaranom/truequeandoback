@@ -7,8 +7,8 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name="operador_logistico")
 public class OperadorLogistico extends Usuario {
+    private String nit;
     private float precioKilogramo;
     private float precioKilometro;
     private float precioMetroCubico;
