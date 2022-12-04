@@ -3,9 +3,14 @@ CREATE TABLE IF NOT EXISTS usuarios (
 	nombre varchar (100) NOT NULL,
 	email varchar (200) UNIQUE NOT NULL,
 	password varchar (50) NOT NULL,
-	direccion varchar (50) NOT NULL,
-	departamento varchar(50) NOT NULL,
-	municipio varchar(50) NOT NULL
+	direccion varchar (50),
+	departamento varchar(50),
+	municipio varchar(50),
+	rol smallint NOT NULL,
+	nit varchar(10),
+	precioPorKilometro Real, 
+	precioPorKilogramo Real,
+	precioPorMetroCubico Real 
 	);
 
 CREATE TABLE IF NOT EXISTS elementos (
@@ -22,24 +27,6 @@ CREATE TABLE IF NOT EXISTS elementos (
 );
 
 
-CREATE TABLE IF NOT EXISTS operadoresLogisticos (
-	idOperadorLogistico integer PRIMARY KEY,
-	nombre varchar (200) NOT NULL,
-	nit integer NOT NULL,
-	email varchar (200) UNIQUE NOT NULL,
-	password varchar (50) NOT NULL,
-	precioPorKilometro Real NOT NULL, 
-	precioPorKilogramo Real NOT NULL,
-	precioPorMetroCubico Real NOT NULL
-	);
-
-CREATE TABLE IF NOT EXISTS administradores (
-	idAdministrador integer PRIMARY KEY,
-	nombre varchar (100) NOT NULL,
-	email varchar (200) UNIQUE NOT NULL,
-	password varchar (50) NOT NULL
-	);
-
 CREATE TABLE IF NOT EXISTS trueques (
 	idTrueque integer,
 	fecha date,
@@ -48,7 +35,7 @@ CREATE TABLE IF NOT EXISTS trueques (
 	idElemento1 integer REFERENCES elementos (idElemento) NOT NULL,
 	idUsuario2 integer REFERENCES usuarios (idUsuario) NOT NULL,
 	idElemento2 integer REFERENCES elementos (idElemento) NOT NULL,
-	idOperadorLogistico integer REFERENCES operadoresLogisticos (idOperadorLogistico) NOT NULL,
+	idUsuarioOL integer REFERENCES usuarios (idUsuario) NOT NULL,
 	PRIMARY KEY (idTrueque, fecha)
 	);
 
@@ -59,21 +46,17 @@ CREATE TABLE IF NOT EXISTS tokens (
 	active varchar (50) NOT NULL,
 	valorToken text NOT NULL,
 	idUsuario integer REFERENCES usuarios (idUsuario),
-	idAdministrador integer REFERENCES administradores (idAdministrador),
-	idOperadorLogistico integer REFERENCES operadoresLogisticos (idOperadorLogistico)
 	);
 
-CREATE TABLE IF NOT EXISTS notificacionesElemento (
+CREATE TABLE IF NOT EXISTS notificaciones (
 	idNotificacionElemento integer PRIMARY KEY,
 	tipo boolean NOT NULL,
 	fecha date NOT NULL,
 	mensaje varchar (200) NOT NULL,
-	idElemento integer REFERENCES elementos (idElemento) NOT NULL
+	idTrueque integer,
+	fechaTrueque date,
+	fechaNotificacion date NOT NULL,
+	idElemento integer REFERENCES elementos (idElemento),
+	FOREIGN KEY (idTrueque,fechaTrueque) REFERENCES trueques (idTrueque,fecha)
 );
 
-CREATE TABLE IF NOT EXISTS notificacionesTrueque (
-	idNotificacionTrueque integer PRIMARY KEY,
-	idTrueque integer NOT NULL,
-	fecha date NOT NULL,
-	FOREIGN KEY (idTrueque,fecha) REFERENCES trueques (idTrueque,fecha)
-);
