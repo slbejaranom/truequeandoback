@@ -13,6 +13,8 @@ import java.util.Date;
 public class Trueque {
 
     @Id
+    @SequenceGenerator(name="trueques_id_seq", sequenceName = "trueques_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "trueques_id_seq")
     private int id;
     private int estado;
     @Id

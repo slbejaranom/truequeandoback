@@ -6,8 +6,8 @@ import ingsoft.truequeandoback.domain.Usuario;
 import java.util.List;
 import java.util.Optional;
 
-public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
-    Optional<Usuario> findByEmail(String email);
+public interface UsuarioRepository<T extends Usuario> extends JpaRepository<T,Integer> {
+    Optional<T> findByEmail(String email);
 
 
     //List<Usuario> findByEmailAndPassword(String email, String password);

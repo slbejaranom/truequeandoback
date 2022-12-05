@@ -15,6 +15,8 @@ public abstract class Notificacion {
     public abstract void notificar();
 
     @Id
+    @SequenceGenerator(name="notificaciones_id_seq", sequenceName = "notificaciones_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notificaciones_id_seq")
     private int id;
     @Column(columnDefinition = "DATE")
     private Date fecha;
