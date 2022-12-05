@@ -50,10 +50,24 @@ public class ServicioAutenticacion {
     }
     public boolean verificarAcceso(TokenDTO tokenDTO) {
         
-    }
-    public boolean verificarTokenActivo(TokenDTO tokenDTO) {
-        
     }*/
+    public boolean verificarTokenActivo(TokenDTO tokenDTO) {
+        Optional<TokenDTO> tokenBuscado = tokenRepository.findByValorToken(tokenDTO.getValorToken());
+        if (tokenBuscado.isPresent()){
+            TokenDTO tokenValidar = tokenBuscado.get();
+            if (tokenValidar.get){
+                return true;
+            }
+            else{
+                return false;
+            }
+        else{
+                AutenticacionDTO autenticacionDTO = new AutenticacionDTO();
+                autenticacionDTO.setErrorMessage("Token no existe");
+            }
+
+        }
+    }
 
     public AutenticacionDTO registrar(Usuario usuario){
         // Me entra un usuario sin Id

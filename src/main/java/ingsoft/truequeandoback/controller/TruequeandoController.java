@@ -18,4 +18,9 @@ public class TruequeandoController {
     public AutenticacionDTO autenticar (@RequestBody Usuario usuario){
         return servicioAutenticacion.autenticar(usuario.getEmail(), usuario.getPassword());
     }
+
+    @PostMapping("/registrar")
+    public AutenticacionDTO registrar (@RequestBody Usuario usuario){
+        return servicioAutenticacion.registrar(usuario);
+    }
 }
