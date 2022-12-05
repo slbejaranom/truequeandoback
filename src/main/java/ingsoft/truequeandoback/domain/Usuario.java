@@ -16,4 +16,6 @@ public class Usuario {
     private String email;    
     private String nombre;
     private String password;
+    @Column(name="rol", insertable = false, updatable = false)
+    private int rol;
 }

@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS usuarios (
-	id integer PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	nombre varchar (100) NOT NULL,
 	email varchar (200) UNIQUE NOT NULL,
 	password varchar (50) NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
 	);
 
 CREATE TABLE IF NOT EXISTS elementos (
-	id integer PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	nombre varchar(100) NOT NULL,
 	categoria integer NOT NULL,
 	valor real NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS elementos (
 );
 
 CREATE TABLE IF NOT EXISTS trueques (
-	id integer,
+	id SERIAL,
 	fecha date,
 	estado integer NOT NULL,
 	idUsuario1 integer REFERENCES usuarios (id) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS trueques (
 	);
 
 CREATE TABLE IF NOT EXISTS tokens (
-	id integer PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	timestamp_generacion bigint NOT NULL,
 	tiempo_expiracion integer NOT NULL,
 	activo boolean NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS tokens (
 	);
 
 CREATE TABLE IF NOT EXISTS notificaciones (
-	id integer PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	tipo_notificacion integer NOT NULL,
 	fecha date NOT NULL,
 	mensaje varchar (200) NOT NULL,
