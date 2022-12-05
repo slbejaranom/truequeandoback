@@ -2,9 +2,7 @@ package ingsoft.truequeandoback.domain;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -14,6 +12,8 @@ public class TokenDTO {
 
 
     @Id
+    @SequenceGenerator(name="tokens_id_seq", sequenceName = "tokens_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tokens_id_seq")
     private int id;
 
     private String valorToken;

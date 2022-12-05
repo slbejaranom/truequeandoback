@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Optional;
 
@@ -20,11 +22,11 @@ public class ServicioAutenticacion {
     private final UsuarioRepository usuarioRepository;
     private final TokenRepository tokenRepository;
     public AutenticacionDTO autenticar(String email, String password){
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        Optional<? extends Usuario> usuario = usuarioRepository.findByEmail(email);
         AutenticacionDTO autenticacionDTO = new AutenticacionDTO();
         if  (usuario.isPresent()){
             Usuario usuarioLogin = usuario.get();
-            if (usuarioLogin.getPassword() == password){
+            if (usuarioLogin.getPassword().equals(password)){
                 TokenDTO token =  generarTokenDto(usuarioLogin);
                 token.setTiempoExpiracion(timeExpiration);
                 tokenRepository.save(token);
@@ -69,8 +71,7 @@ public class ServicioAutenticacion {
     private TokenDTO generarTokenDto(Usuario usuario){
         // Usuario.email:ROL:Timestamp
         TokenDTO tokenDTO = new TokenDTO();
-        tokenDTO.setId(1234);
-        tokenDTO.setValorToken(usuario.getEmail()+":"+new Date().getTime());
+        tokenDTO.setValorToken(Base64.getEncoder().encodeToString((usuario.getEmail()+":"+usuario.getRol()+":"+new Date().getTime()).getBytes(StandardCharsets.UTF_8)));
         return  tokenDTO;
     }
 }

@@ -14,6 +14,8 @@ public class Elemento {
     }
 
     @Id
+    @SequenceGenerator(name="elementos_id_seq", sequenceName = "elementos_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "elementos_id_seq")
     private int id;
     private float altura;
     private float anchura;
