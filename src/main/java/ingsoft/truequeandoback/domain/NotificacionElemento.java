@@ -12,9 +12,9 @@ public class NotificacionElemento extends Notificacion {
 
     }
     @ManyToOne
-    @JoinColumn(name="id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name="idusuario", nullable = false, insertable = false, updatable = false)
     private Cliente clienteAsociado;
     @ManyToOne
-    @JoinColumn(name="id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name="idelemento", nullable = false, insertable = false, updatable = false)
     private Elemento elementoAsociado;
 }

@@ -55,5 +55,6 @@ CREATE TABLE IF NOT EXISTS notificaciones (
 	idTrueque integer,
 	fechaTrueque date,	
 	idElemento integer REFERENCES elementos (id),
+	idUsuario integer REFERENCES usuarios (id),
 	FOREIGN KEY (id,fechaTrueque) REFERENCES trueques (id,fecha)
 );

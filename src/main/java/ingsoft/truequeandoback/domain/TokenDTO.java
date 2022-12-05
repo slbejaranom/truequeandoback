@@ -20,6 +20,9 @@ public class TokenDTO {
     private boolean activo;
     private int tiempoExpiracion;
     private long timestampGeneracion;
+    @ManyToOne
+    @JoinColumn(name="idusuario")
+    private Usuario usuario;
 
 
 }

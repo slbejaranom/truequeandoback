@@ -14,8 +14,8 @@ public class NotificacionTrueque extends Notificacion {
     }
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name="id", referencedColumnName = "id", insertable = false, updatable = false),
-            @JoinColumn(name="fecha", referencedColumnName = "fecha", insertable = false, updatable = false)
+            @JoinColumn(name="idtrueque", referencedColumnName = "id"),
+            @JoinColumn(name="fechatrueque", referencedColumnName = "fecha")
     })
     private Trueque trueque;
 }
