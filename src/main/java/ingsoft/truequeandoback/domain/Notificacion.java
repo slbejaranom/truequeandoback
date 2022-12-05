@@ -19,4 +19,7 @@ public abstract class Notificacion {
     @Column(columnDefinition = "DATE")
     private Date fecha;
     private String mensaje;
+    @Column(name="tipo_notificacion", insertable = false, updatable = false)
+    private int tipoNotificacion;
+
 }
