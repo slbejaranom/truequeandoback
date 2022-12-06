@@ -1,16 +1,26 @@
 package ingsoft.truequeandoback.domain;
 
+import ingsoft.truequeandoback.repository.ElementoRepository;
+import ingsoft.truequeandoback.repository.UsuarioRepository;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Data
 @Entity
 @Table(name="elementos")
 public class Elemento {
-
-    public float calcularVolumen(){
-        return this.altura*this.anchura*this.longitud;
+    //private final ElementoRepository ElementoRepository;
+    public float calcularVolumen( ){
+        float volumen;
+        if (this.altura > 0 && this.anchura > 0 && this.longitud > 0) {
+            volumen = this.altura * this.anchura * this.longitud;
+        }
+        else {
+            volumen = -2;
+        }
+        return volumen;
     }
 
     @Id

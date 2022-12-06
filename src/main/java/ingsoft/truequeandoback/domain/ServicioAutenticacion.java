@@ -63,7 +63,8 @@ public class ServicioAutenticacion {
         }
     }
     /*public boolean verificarAcceso(TokenDTO tokenDTO) {
-        
+        Optional<TokenDTO> tokenBuscado = tokenRepository.findByValorToken(tokenDTO.getValorToken());
+        tokenBuscado.get
     }*/
     public boolean verificarTokenActivo(TokenDTO tokenDTO) {
         Optional<TokenDTO> tokenBuscado = tokenRepository.findByValorToken(tokenDTO.getValorToken());
