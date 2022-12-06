@@ -53,20 +53,22 @@ public class ServicioAutenticacion {
     }*/
     public boolean verificarTokenActivo(TokenDTO tokenDTO) {
         Optional<TokenDTO> tokenBuscado = tokenRepository.findByValorToken(tokenDTO.getValorToken());
-        if (tokenBuscado.isPresent()){
+        boolean activo;
+        if (tokenBuscado.isPresent()) {
             TokenDTO tokenValidar = tokenBuscado.get();
-            if (tokenValidar.get){
-                return true;
+            if (tokenValidar.isActivo()) {
+                activo =  true;
             }
-            else{
-                return false;
+            else {
+                activo = false;
             }
+        }
         else{
                 AutenticacionDTO autenticacionDTO = new AutenticacionDTO();
                 autenticacionDTO.setErrorMessage("Token no existe");
+                activo = false;
             }
-
-        }
+        return activo;
     }
 
     public AutenticacionDTO registrar(Usuario usuario){
