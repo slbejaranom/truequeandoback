@@ -45,10 +45,24 @@ public class ServicioAutenticacion {
         }
         return autenticacionDTO;
     }
-    /*public void cancelarToken(TokenDTO tokenDTO) {
-        
+    public void cancelarToken(TokenDTO tokenDTO) {
+        Optional<TokenDTO> tokenBuscado = tokenRepository.findByValorToken(tokenDTO.getValorToken());
+        if (tokenBuscado.isPresent()) {
+            TokenDTO tokenValidar = tokenBuscado.get();
+            if (tokenValidar.isActivo()) {
+                tokenValidar.setActivo(false);
+                tokenRepository.save(tokenValidar);
+            }
+            else {
+
+            }
+        }
+        else{
+            AutenticacionDTO autenticacionDTO = new AutenticacionDTO();
+            autenticacionDTO.setErrorMessage("Token no existe");
+        }
     }
-    public boolean verificarAcceso(TokenDTO tokenDTO) {
+    /*public boolean verificarAcceso(TokenDTO tokenDTO) {
         
     }*/
     public boolean verificarTokenActivo(TokenDTO tokenDTO) {
@@ -57,7 +71,7 @@ public class ServicioAutenticacion {
         if (tokenBuscado.isPresent()) {
             TokenDTO tokenValidar = tokenBuscado.get();
             if (tokenValidar.isActivo()) {
-                activo =  true;
+                activo =  false;
             }
             else {
                 activo = false;

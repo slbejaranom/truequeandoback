@@ -2,6 +2,7 @@ package ingsoft.truequeandoback.controller;
 
 import ingsoft.truequeandoback.domain.AutenticacionDTO;
 import ingsoft.truequeandoback.domain.ServicioAutenticacion;
+import ingsoft.truequeandoback.domain.TokenDTO;
 import ingsoft.truequeandoback.domain.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,5 +23,15 @@ public class TruequeandoController {
     @PostMapping("/registrar")
     public AutenticacionDTO registrar (@RequestBody Usuario usuario){
         return servicioAutenticacion.registrar(usuario);
+    }
+
+    @PostMapping("/verificarTokenActivo")
+    public boolean verificarTokenActivo (@RequestBody TokenDTO tokenDTO){
+        return servicioAutenticacion.verificarTokenActivo(tokenDTO);
+    }
+
+    @PostMapping("/cancelarToken")
+    public void cancelarToken (@RequestBody TokenDTO tokenDTO){
+        servicioAutenticacion.cancelarToken(tokenDTO);
     }
 }
