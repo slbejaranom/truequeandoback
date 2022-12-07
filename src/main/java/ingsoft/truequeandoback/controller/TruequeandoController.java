@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class TruequeandoController {
     private final ServicioAutenticacion servicioAutenticacion;
-    private final Elemento elemento;
+    //private final Elemento elemento;
     @PostMapping("/autenticar")
     public AutenticacionDTO autenticar (@RequestBody Usuario usuario){
         return servicioAutenticacion.autenticar(usuario.getEmail(), usuario.getPassword());

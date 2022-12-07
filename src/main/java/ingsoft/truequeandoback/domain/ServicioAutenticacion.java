@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Data
 @RequiredArgsConstructor
 @Service
 public class ServicioAutenticacion {
+
     @Value("${token.expiration-time}")
     private int timeExpiration;
     private final UsuarioRepository usuarioRepository;
@@ -62,10 +64,14 @@ public class ServicioAutenticacion {
             autenticacionDTO.setErrorMessage("Token no existe");
         }
     }
-    /*public boolean verificarAcceso(TokenDTO tokenDTO) {
+    public boolean verificarAcceso(TokenDTO tokenDTO, String ruta) {
         Optional<TokenDTO> tokenBuscado = tokenRepository.findByValorToken(tokenDTO.getValorToken());
-        tokenBuscado.get
-    }*/
+        if ( tokenBuscado.isPresent()){
+            int rol = tokenDTO.getUsuario().getRol();
+
+        }
+        return true;
+    }
     public boolean verificarTokenActivo(TokenDTO tokenDTO) {
         Optional<TokenDTO> tokenBuscado = tokenRepository.findByValorToken(tokenDTO.getValorToken());
         boolean activo;
