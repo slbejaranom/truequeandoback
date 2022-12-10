@@ -7,14 +7,16 @@ import javax.persistence.*;
 @Data
 @Entity
 public class NotificacionElemento extends Notificacion {
-    @Override
-    public void notificar(){
 
-    }
-    @ManyToOne
-    @JoinColumn(name="idusuario", nullable = false, insertable = false, updatable = false)
-    private Cliente clienteAsociado;
-    @ManyToOne
-    @JoinColumn(name="idelemento", nullable = false, insertable = false, updatable = false)
-    private Elemento elementoAsociado;
+  @Override
+  public void notificar() {
+    //ToDo implementar notificar elemento
+  }
+
+  @ManyToOne
+  @JoinColumn(name = "idusuario", nullable = false, insertable = false, updatable = false)
+  private Cliente clienteAsociado;
+  @ManyToOne
+  @JoinColumn(name = "idelemento", nullable = false, insertable = false, updatable = false)
+  private Elemento elementoAsociado;
 }

@@ -7,10 +7,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class AppConfig implements WebMvcConfigurer {
-    @Autowired
-    SessionInterceptor sessionInterceptor;
-    @Override
-    public void addInterceptors (InterceptorRegistry registry){
-        registry.addInterceptor(sessionInterceptor);
-    }
+
+  @Autowired
+  SessionInterceptor sessionInterceptor;
+
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(sessionInterceptor);
+  }
 }

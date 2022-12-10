@@ -8,14 +8,15 @@ import javax.persistence.*;
 @Entity
 public class NotificacionTrueque extends Notificacion {
 
-    @Override
-    public void notificar(){
-        
-    }
-    @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name="idtrueque", referencedColumnName = "id"),
-            @JoinColumn(name="fechatrueque", referencedColumnName = "fecha")
-    })
-    private Trueque trueque;
+  @Override
+  public void notificar() {
+    //ToDo implementar notificar trueque
+  }
+
+  @ManyToOne
+  @JoinColumns({
+      @JoinColumn(name = "idtrueque", referencedColumnName = "id"),
+      @JoinColumn(name = "fechatrueque", referencedColumnName = "fecha")
+  })
+  private Trueque trueque;
 }
