@@ -9,16 +9,6 @@ import javax.persistence.*;
 @Table(name = "elementos")
 public class Elemento {
 
-  public float calcularVolumen() {
-    float volumen;
-    if (this.altura > 0 && this.anchura > 0 && this.longitud > 0) {
-      volumen = this.altura * this.anchura * this.longitud;
-    } else {
-      volumen = -2;
-    }
-    return volumen;
-  }
-
   @Id
   @SequenceGenerator(name = "elementos_id_seq", sequenceName = "elementos_id_seq", allocationSize = 1)
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "elementos_id_seq")
@@ -32,6 +22,16 @@ public class Elemento {
   private float peso;
   private float valor;
   @ManyToOne
-  @JoinColumn(name = "idusuario", nullable = false)
+  @JoinColumn(name = "idusuario", nullable = false, insertable = false, updatable = false)
   private Cliente cliente;
+
+  public float calcularVolumen() {
+    float volumen;
+    if (this.altura > 0 && this.anchura > 0 && this.longitud > 0) {
+      volumen = this.altura * this.anchura * this.longitud;
+    } else {
+      volumen = -2;
+    }
+    return volumen;
+  }
 }
