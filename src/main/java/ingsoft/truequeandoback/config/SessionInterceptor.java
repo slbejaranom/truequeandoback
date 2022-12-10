@@ -55,7 +55,7 @@ public class SessionInterceptor implements HandlerInterceptor {
     if (!PATRON_REGEX_TOKEN.matcher(token).matches()) {
       return false;
     }
-    if(!verificarAccesoPorRol(token, ruta)){
+    if(!servicioAutenticacion.verificarAccesoPorRol(token, ruta)){
       generarError(response,HttpStatus.FORBIDDEN);
       return false;
     }
@@ -71,16 +71,7 @@ public class SessionInterceptor implements HandlerInterceptor {
     // your code
   }
 
-  private boolean verificarAccesoPorRol(String token, String ruta) {
-    String[] tokenArgs = token.split(":");
-    int rol = Integer.parseInt(tokenArgs[1]);
-    switch (rol) {
-      case 1:
-        return RUTAS_ACCESIBLES_CLIENTE.contains(ruta);
-      default:
-        return false;
-    }
-  }
+
 
   private void generarError(HttpServletResponse response, HttpStatus status) throws Exception{
     response.setStatus(status.value());

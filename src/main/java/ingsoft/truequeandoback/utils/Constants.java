@@ -15,9 +15,12 @@ public class Constants {
   public static final String RUTA_GESTIONAR_TRUEQUE = "/gestionartrueque";
   public static final String RUTA_ENTREGAR_TRUEQUE = "/entregartrueque";
 
+  public  static final String RUTA_ERROR = "/error";
+
   public static final Set<String> RUTAS_ACCESIBLES_TODOS = Set.of(
       RUTA_REGISTRARSE_EN_SISTEMA,
-      RUTA_IDENTIFICARSE_EN_SISTEMA);
+      RUTA_IDENTIFICARSE_EN_SISTEMA,
+      RUTA_ERROR    );
 
   public static final Set<String> RUTAS_ACCESIBLES_CLIENTE = Set.of(
       RUTA_REGISTRAR_OBJETO,

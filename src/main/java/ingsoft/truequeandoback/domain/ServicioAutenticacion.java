@@ -1,5 +1,6 @@
 package ingsoft.truequeandoback.domain;
 
+import com.sun.jdi.request.DuplicateRequestException;
 import ingsoft.truequeandoback.repository.TokenRepository;
 import ingsoft.truequeandoback.repository.UsuarioRepository;
 import lombok.Data;
@@ -12,6 +13,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
 import java.util.Optional;
+
+import static ingsoft.truequeandoback.utils.Constants.RUTAS_ACCESIBLES_CLIENTE;
+import static ingsoft.truequeandoback.utils.Constants.RUTAS_ACCESIBLES_TODOS;
 
 @Data
 @RequiredArgsConstructor
@@ -30,7 +34,7 @@ public class ServicioAutenticacion {
       Usuario usuarioLogin = usuario.get();
       if (usuarioLogin.getPassword().equals(password)) {
         TokenDTO token = generarTokenDto(usuarioLogin);
-        token.setTiempoExpiracion(timeExpiration);
+        token.setTiempoExpiracion(timeExpiration*1000);
         token.setUsuario(usuarioLogin);
         token.setActivo(true);
         token.setTimestampGeneracion(new Date().getTime());
@@ -71,19 +75,26 @@ public class ServicioAutenticacion {
     return true;
   }
 
-  public AutenticacionDTO registrar(Usuario usuario) {
+  public Usuario registrar(Usuario usuario) {
     // Me entra un usuario sin Id
     // SI el usuario existe, es por email, es por que ya esta registrado y no se puede repetir
     // Si no existe me crea un usuario que es guardar el usuario en la base de datos con el save User
     Optional<Usuario> usuarioRegister = usuarioRepository.findByEmail(usuario.getEmail());
-    AutenticacionDTO autenticacionDTO = new AutenticacionDTO();
     if (usuarioRegister.isPresent()) {
-      autenticacionDTO.setErrorMessage("Usuario ya existe");
-    } else {
-      usuarioRepository.save(usuario);
-      autenticacionDTO.setErrorMessage("El usuario ha sido registrado exitosamente");
+      throw new DuplicateRequestException("Usuario ya existe");
     }
-    return autenticacionDTO;
+      return usuarioRepository.save(usuario); // devolver Usuario
+  }
+
+  public boolean verificarAccesoPorRol(String token, String ruta) {
+    String[] tokenArgs = token.split(":");
+    int rol = Integer.parseInt(tokenArgs[1]);
+    switch (rol) {
+      case 1:
+        return RUTAS_ACCESIBLES_CLIENTE.contains(ruta) || RUTAS_ACCESIBLES_TODOS.contains(ruta);
+      default:
+        return false;
+    }
   }
 
   private TokenDTO generarTokenDto(Usuario usuario) {
