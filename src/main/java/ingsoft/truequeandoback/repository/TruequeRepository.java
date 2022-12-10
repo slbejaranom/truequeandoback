@@ -5,6 +5,6 @@ import ingsoft.truequeandoback.domain.Trueque;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TruequeRepository extends JpaRepository<Trueque,Long> {
+public interface TruequeRepository extends JpaRepository<Trueque, Long> {
 
 }

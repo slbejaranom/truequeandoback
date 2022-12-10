@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class AutenticacionDTO {
-    private String errorMessage;
-    private int expiresln;
-    private String token;
+
+  private String errorMessage;
+  private int expiresln;
+  private String token;
 }

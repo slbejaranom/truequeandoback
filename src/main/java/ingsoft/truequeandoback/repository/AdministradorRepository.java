@@ -5,6 +5,6 @@ import ingsoft.truequeandoback.domain.Administrador;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdministradorRepository extends JpaRepository<Administrador,Long> {
+public interface AdministradorRepository extends JpaRepository<Administrador, Long> {
 
 }

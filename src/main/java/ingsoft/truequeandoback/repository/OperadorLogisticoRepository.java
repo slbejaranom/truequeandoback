@@ -5,6 +5,6 @@ import ingsoft.truequeandoback.domain.OperadorLogistico;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OperadorLogisticoRepository extends JpaRepository<OperadorLogistico,Long> {
+public interface OperadorLogisticoRepository extends JpaRepository<OperadorLogistico, Long> {
 
 }

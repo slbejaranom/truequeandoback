@@ -7,6 +7,7 @@ import java.util.Date;
 
 @AllArgsConstructor
 public class TruequePK implements Serializable {
-    private int id;
-    private Date fecha;
+
+  private int id;
+  private Date fecha;
 }
