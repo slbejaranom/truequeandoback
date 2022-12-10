@@ -1,4 +1,4 @@
-package ingsoft.truequeandoback.controller;
+package ingsoft.truequeandoback.controller.exception;
 
 public class ForbiddenException extends RuntimeException{
 
