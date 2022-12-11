@@ -1,10 +1,12 @@
 package ingsoft.truequeandoback.domain;
 
-import lombok.Data;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "elementos")
 public class Elemento {
@@ -21,8 +23,10 @@ public class Elemento {
   private String nombre;
   private float peso;
   private float valor;
-  @ManyToOne
-  @JoinColumn(name = "idusuario", nullable = false, insertable = false, updatable = false)
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "idusuario", nullable = false)
+  @JsonBackReference
   private Cliente cliente;
 
   public float calcularVolumen() {

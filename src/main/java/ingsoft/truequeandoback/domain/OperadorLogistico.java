@@ -1,11 +1,12 @@
 package ingsoft.truequeandoback.domain;
 
-import lombok.Data;
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @DiscriminatorValue(value = "2")
 public class OperadorLogistico extends Usuario {
