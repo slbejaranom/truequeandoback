@@ -12,7 +12,7 @@ import static ingsoft.truequeandoback.utils.Constants.*;
 @RestController
 @RequestMapping("/")
 @RequiredArgsConstructor
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class TruequeandoController {
 
   private final ServicioAutenticacion servicioAutenticacion;
