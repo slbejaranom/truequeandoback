@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface TruequeRepository extends JpaRepository<Trueque, Long> {
 
   List<Trueque> findAllByUsuario1Email(String email);
+
+  List<Trueque> findAllByUsuario2Email(String email);
 }

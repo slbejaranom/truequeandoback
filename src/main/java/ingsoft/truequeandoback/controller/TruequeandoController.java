@@ -47,4 +47,9 @@ public class TruequeandoController {
   public List<Trueque> listarTruequesHechosPorUsuario(@RequestParam String email){
     return truequeandoService.listarTruequesHechosPorUsuario(email);
   }
+
+  @GetMapping(RUTA_LISTAR_TRUEQUES_HECHOS_A_USUARIO)
+  public List<Trueque> listarTruequesHechosAUsuario(@RequestParam String email){
+    return truequeandoService.listarTruequesHechosAUsuario(email);
+  }
 }
