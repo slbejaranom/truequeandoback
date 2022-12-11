@@ -40,8 +40,15 @@ public class SessionInterceptor implements HandlerInterceptor {
     String ruta = request.getRequestURI();
     String authHeader = request.getHeader("Authorization");
     log.info("Intento de acceso a aplicacion en ruta {} con auth header {}", ruta, authHeader);
-    if (authHeader == null) {
-      return RUTAS_ACCESIBLES_TODOS.contains(ruta);
+    if(request.getMethod().equals("OPTIONS")){
+      return true;
+    }
+    if (authHeader == null && !RUTAS_ACCESIBLES_TODOS.contains(ruta)) {
+      generarError(response, HttpStatus.FORBIDDEN);
+      return false;
+    }
+    if(RUTAS_ACCESIBLES_TODOS.contains(ruta)){
+      return true;
     }
     String[] authArgs = authHeader.split(" ");
     if(authArgs.length < 2){
