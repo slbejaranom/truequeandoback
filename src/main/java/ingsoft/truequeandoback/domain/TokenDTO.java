@@ -1,11 +1,11 @@
 package ingsoft.truequeandoback.domain;
 
-import lombok.Data;
-
 import javax.persistence.*;
-import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "tokens")
 public class TokenDTO {

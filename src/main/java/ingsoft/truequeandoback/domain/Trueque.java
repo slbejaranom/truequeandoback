@@ -1,12 +1,15 @@
 package ingsoft.truequeandoback.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import ingsoft.truequeandoback.mapper.TruequePK;
-import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "trueques")
 @IdClass(TruequePK.class)
@@ -24,15 +27,15 @@ public class Trueque {
   private Date fecha;
 
   @ManyToOne
-  @JoinColumn(name = "idusuariool", nullable = false, insertable = false, updatable = false)
+  @JoinColumn(name = "idusuariool", nullable = false)
   private OperadorLogistico transportador;
 
   @ManyToOne
-  @JoinColumn(name = "idusuario1", nullable = false, insertable = false, updatable = false)
+  @JoinColumn(name = "idusuario1", nullable = false)
   private Usuario usuario1; //quien inicia el trueque
 
   @ManyToOne
-  @JoinColumn(name = "idusuario2", nullable = false, insertable = false, updatable = false)
+  @JoinColumn(name = "idusuario2", nullable = false)
   private Usuario usuario2; // quien recive el trueque
 
   @ManyToOne

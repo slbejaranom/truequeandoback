@@ -2,9 +2,11 @@ package ingsoft.truequeandoback.domain;
 
 import javax.persistence.*;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "usuarios")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
