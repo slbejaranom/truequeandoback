@@ -11,6 +11,7 @@ import ingsoft.truequeandoback.domain.TokenDTO;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Date;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Slf4j
 @Component
 public class SessionInterceptor implements HandlerInterceptor {
 
@@ -37,6 +39,7 @@ public class SessionInterceptor implements HandlerInterceptor {
     // your code
     String ruta = request.getRequestURI();
     String authHeader = request.getHeader("Authorization");
+    log.info("Intento de acceso a aplicacion en ruta {} con auth header {}", ruta, authHeader);
     if (authHeader == null) {
       return RUTAS_ACCESIBLES_TODOS.contains(ruta);
     }
@@ -70,8 +73,6 @@ public class SessionInterceptor implements HandlerInterceptor {
       ModelAndView modelAndView) throws Exception {
     // your code
   }
-
-
 
   private void generarError(HttpServletResponse response, HttpStatus status) throws Exception{
     response.setStatus(status.value());

@@ -1,10 +1,11 @@
 package ingsoft.truequeandoback.domain;
 
-import lombok.Data;
-
 import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class NotificacionElemento extends Notificacion {
 

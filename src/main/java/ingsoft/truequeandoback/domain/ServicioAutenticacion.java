@@ -3,8 +3,9 @@ package ingsoft.truequeandoback.domain;
 import com.sun.jdi.request.DuplicateRequestException;
 import ingsoft.truequeandoback.repository.TokenRepository;
 import ingsoft.truequeandoback.repository.UsuarioRepository;
-import lombok.Data;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,8 @@ import java.util.Optional;
 import static ingsoft.truequeandoback.utils.Constants.RUTAS_ACCESIBLES_CLIENTE;
 import static ingsoft.truequeandoback.utils.Constants.RUTAS_ACCESIBLES_TODOS;
 
-@Data
+@Getter
+@Setter
 @RequiredArgsConstructor
 @Service
 public class ServicioAutenticacion {

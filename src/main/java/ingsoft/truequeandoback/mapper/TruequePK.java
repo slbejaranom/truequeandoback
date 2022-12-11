@@ -5,9 +5,11 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class TruequePK implements Serializable {
 
   private int id;
