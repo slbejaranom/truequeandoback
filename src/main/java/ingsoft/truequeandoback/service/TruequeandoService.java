@@ -31,15 +31,9 @@ public class TruequeandoService {
     public List<Elemento> listarObetosUsuario(int id){
         Optional<Usuario> usuarioBuscado = usuarioRepository.findById(id);
         if (!usuarioBuscado.isPresent()){
-            //throw new FileSystemNotFoundException("El usuario no existe");
             throw new IllegalArgumentException("El usuario no existe");
         }
-        Usuario usuario = usuarioBuscado.get();
-        if(usuario.getRol()!=1){
-            throw new IllegalArgumentException("Este usuario no contiene elementos");
-        }
-        List<Elemento> elementosUsuario;
-        return  elementosUsuario = elementoRepository.findAllByClienteId(id);
+        return elementoRepository.findAllByClienteId(id);
     }
     public Trueque propuestaTrueque (Trueque trueque){
         log.info("Inicio de registro propuesta trueque");
