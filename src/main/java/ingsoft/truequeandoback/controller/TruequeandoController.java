@@ -3,11 +3,9 @@ package ingsoft.truequeandoback.controller;
 import ingsoft.truequeandoback.domain.*;
 import ingsoft.truequeandoback.service.TruequeandoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static ingsoft.truequeandoback.utils.Constants.*;
 
@@ -35,6 +33,9 @@ public class TruequeandoController {
   @PostMapping(RUTA_HACER_PROPUESTA_TRUEQUE)
   public  Trueque propuestaTrueque(@RequestBody Trueque trueque){return  truequeandoService.propuestaTrueque(trueque);}
 
+  @GetMapping(RUTA_LISTAR_ELEMENTOS_USUARIO)
+  public List<Elemento> listarObetosUsuario(@RequestParam int id){return truequeandoService.listarObetosUsuario(id);}
 }
 
 
+//http://localhost:5555/listarelementosusuario?id=
