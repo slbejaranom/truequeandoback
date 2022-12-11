@@ -12,5 +12,5 @@ public interface ElementoRepository extends JpaRepository<Elemento, Integer> {
 
   Optional<Elemento> findById(int id);
 
-  List<Elemento> findAllByClienteId(int id);
+  List<Elemento> findAllByClienteEmail(String email);
 }

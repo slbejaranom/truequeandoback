@@ -6,6 +6,7 @@ import ingsoft.truequeandoback.domain.Usuario;
 import ingsoft.truequeandoback.repository.ElementoRepository;
 import ingsoft.truequeandoback.repository.TruequeRepository;
 import ingsoft.truequeandoback.repository.UsuarioRepository;
+import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ import java.util.Optional;
 public class TruequeandoService {
     private final ElementoRepository elementoRepository;
     private final TruequeRepository truequeRepository;
-    private final UsuarioRepository usuarioRepository;
+    private final UsuarioRepository<Usuario> usuarioRepository;
 
     public Elemento registrarElemento (Elemento elemento){
         //generar las escepciones para error en caso que halla algo nulo
@@ -28,12 +29,12 @@ public class TruequeandoService {
         return elementoRepository.save(elemento);
     }
 
-    public List<Elemento> listarObetosUsuario(int id){
-        Optional<Usuario> usuarioBuscado = usuarioRepository.findById(id);
+    public List<Elemento> listarObjetosUsuario(String email){
+        Optional<Usuario> usuarioBuscado = usuarioRepository.findByEmail(email);
         if (!usuarioBuscado.isPresent()){
             throw new IllegalArgumentException("El usuario no existe");
         }
-        return elementoRepository.findAllByClienteId(id);
+        return elementoRepository.findAllByClienteEmail(email);
     }
     public Trueque propuestaTrueque (Trueque trueque){
         log.info("Inicio de registro propuesta trueque");
@@ -64,4 +65,11 @@ public class TruequeandoService {
         return truequeRepository.save(trueque);
     }
 
+    public List<Trueque> listarTruequesHechosPorUsuario(String email){
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        if(usuario.isEmpty()){
+            throw new IllegalArgumentException("El usuario no existe");
+        }
+        return truequeRepository.findAllByUsuario1Email(email);
+    }
 }

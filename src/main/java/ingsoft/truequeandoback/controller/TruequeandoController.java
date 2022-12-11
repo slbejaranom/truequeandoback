@@ -17,6 +17,7 @@ public class TruequeandoController {
 
   private final ServicioAutenticacion servicioAutenticacion;
   private final TruequeandoService truequeandoService;
+
   @PostMapping(RUTA_IDENTIFICARSE_EN_SISTEMA)
   public AutenticacionDTO autenticar(@RequestBody Usuario usuario) {
     return servicioAutenticacion.autenticar(usuario.getEmail(), usuario.getPassword());
@@ -28,14 +29,22 @@ public class TruequeandoController {
   }
 
   @PostMapping(RUTA_REGISTRAR_OBJETO)
-  public Elemento registrarElemento(@RequestBody Elemento elemento){return truequeandoService.registrarElemento(elemento);}
+  public Elemento registrarElemento(@RequestBody Elemento elemento) {
+    return truequeandoService.registrarElemento(elemento);
+  }
 
   @PostMapping(RUTA_HACER_PROPUESTA_TRUEQUE)
-  public  Trueque propuestaTrueque(@RequestBody Trueque trueque){return  truequeandoService.propuestaTrueque(trueque);}
+  public Trueque propuestaTrueque(@RequestBody Trueque trueque) {
+    return truequeandoService.propuestaTrueque(trueque);
+  }
 
   @GetMapping(RUTA_LISTAR_ELEMENTOS_USUARIO)
-  public List<Elemento> listarObetosUsuario(@RequestParam int id){return truequeandoService.listarObetosUsuario(id);}
+  public List<Elemento> listarObjetosUsuario(@RequestParam String email) {
+    return truequeandoService.listarObjetosUsuario(email);
+  }
+
+  @GetMapping(RUTA_LISTAR_TRUEQUES_HECHOS_POR_USUARIO)
+  public List<Trueque> listarTruequesHechosPorUsuario(@RequestParam String email){
+    return truequeandoService.listarTruequesHechosPorUsuario(email);
+  }
 }
-
-
-//http://localhost:5555/listarelementosusuario?id=
