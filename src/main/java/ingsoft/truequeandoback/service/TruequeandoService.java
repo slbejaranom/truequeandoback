@@ -9,8 +9,8 @@ import ingsoft.truequeandoback.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -19,13 +19,21 @@ import java.util.Optional;
 public class TruequeandoService {
     private final ElementoRepository elementoRepository;
     private final TruequeRepository truequeRepository;
-    private final UsuarioRepository<Usuario> usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
     public Elemento registrarElemento (Elemento elemento){
         //generar las escepciones para error en caso que halla algo nulo
         // validar que el rol sea usuario
         elemento.setEstado(true);
         return elementoRepository.save(elemento);
+    }
+
+    public List<Elemento> listarObetosUsuario(int id){
+        Optional<Usuario> usuarioBuscado = usuarioRepository.findById(id);
+        if (!usuarioBuscado.isPresent()){
+            throw new IllegalArgumentException("El usuario no existe");
+        }
+        return elementoRepository.findAllByClienteId(id);
     }
     public Trueque propuestaTrueque (Trueque trueque){
         log.info("Inicio de registro propuesta trueque");
