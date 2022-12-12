@@ -81,4 +81,33 @@ public class TruequeandoService {
       }
       return truequeRepository.findAllByUsuario2Email(email);
   }
+
+  public void aceptarTrueque(Trueque trueque){
+    Optional <Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
+    if (truequeAceptado.isEmpty()){
+      throw new IllegalArgumentException("Ek trueque no existe");
+    }
+    trueque.setEstado(1);
+    truequeRepository.save(trueque);
+  }
+
+  public void cerrarTrueque(Trueque trueque){
+    Optional <Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
+    if (truequeAceptado.isEmpty()){
+      throw new IllegalArgumentException("Ek trueque no existe");
+    }
+    trueque.setEstado(2);
+    truequeRepository.save(trueque);
+  }
+
+  public void  cancelarTrueque(Trueque trueque){
+    Optional <Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
+    if (truequeAceptado.isEmpty()){
+      throw new IllegalArgumentException("Ek trueque no existe");
+    }
+    trueque.getElemento1().setEstado(true);
+    trueque.getElemento2().setEstado(true);
+    trueque.setEstado(3);
+    truequeRepository.save(trueque);
+  }
 }
