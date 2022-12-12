@@ -110,4 +110,8 @@ public class TruequeandoService {
     trueque.setEstado(3);
     truequeRepository.save(trueque);
   }
+
+  public List<Usuario> listarOperadoresLogisticos(){
+    return usuarioRepository.findAllByRol(2);
+  }
 }
