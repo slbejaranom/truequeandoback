@@ -53,13 +53,13 @@ public class TruequeandoController {
     return truequeandoService.listarTruequesHechosAUsuario(email);
   }
 
-  @GetMapping(RUTA_ACEPTAR_TRUEQUES)
+  @PutMapping(RUTA_ACEPTAR_TRUEQUES)
   public void aceptarTrueque(@RequestBody Trueque trueque){  }
 
-  @GetMapping(RUTA_CERRAR_TRUEQUE)
+  @PutMapping(RUTA_CERRAR_TRUEQUE)
   public void cerrarTrueque(Trueque trueque){}
 
-  @GetMapping(RUTA_RECHAZAR_TRUEQUE)
+  @PutMapping(RUTA_RECHAZAR_TRUEQUE)
   public void  cancelarTrueque(Trueque trueque){}
 
   @GetMapping(RUTA_LISTAR_TRUEQUES_ACEPTADOS)
@@ -69,6 +69,6 @@ public class TruequeandoController {
   @GetMapping(RUTA_LISTAR_CATEGORIAS)
   public List<Categoria> listarCategorias() {return truequeandoService.listarCategorias();}
 
-  @GetMapping(RUTA_AGREGAR_CATEGORIA)
+  @PostMapping(RUTA_AGREGAR_CATEGORIA)
   public Categoria agregarCategoria(@RequestBody Categoria categoria){return  truequeandoService.agregarCategoria(categoria);}
 }
