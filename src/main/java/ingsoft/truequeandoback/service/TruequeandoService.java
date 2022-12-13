@@ -7,6 +7,7 @@ import ingsoft.truequeandoback.domain.Usuario;
 import ingsoft.truequeandoback.repository.ElementoRepository;
 import ingsoft.truequeandoback.repository.TruequeRepository;
 import ingsoft.truequeandoback.repository.UsuarioRepository;
+import ingsoft.truequeandoback.service.enums.EstadoTrueque;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -74,7 +75,7 @@ public class TruequeandoService {
     elementoRecibido.setEstado(false);
     trueque.setElemento1(elementoDado);
     trueque.setElemento2(elementoRecibido);
-    trueque.setEstado(0);
+    trueque.setEstado(EstadoTrueque.GENERADO.ordinal());
     trueque.setFecha(new Date());
     return truequeRepository.save(trueque);
   }
@@ -98,9 +99,9 @@ public class TruequeandoService {
   public void aceptarTrueque(Trueque trueque){
     Optional <Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
     if (truequeAceptado.isEmpty()){
-      throw new IllegalArgumentException("Ek trueque no existe");
+      throw new IllegalArgumentException("El trueque no existe");
     }
-    trueque.setEstado(1);
+    trueque.setEstado(EstadoTrueque.ACEPTADO.ordinal());
     truequeRepository.save(trueque);
   }
 
@@ -109,20 +110,21 @@ public class TruequeandoService {
     if (truequeAceptado.isEmpty()){
       throw new IllegalArgumentException("Ek trueque no existe");
     }
-    trueque.setEstado(2);
+    trueque.setEstado(EstadoTrueque.CERRADO.ordinal());
     truequeRepository.save(trueque);
   }
 
   public void  cancelarTrueque(Trueque trueque){
     Optional <Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
     if (truequeAceptado.isEmpty()){
-      throw new IllegalArgumentException("Ek trueque no existe");
+      throw new IllegalArgumentException("EL trueque no existe");
     }
     trueque.getElemento1().setEstado(true);
     trueque.getElemento2().setEstado(true);
-    trueque.setEstado(3);
+    trueque.setEstado(EstadoTrueque.RECHAZADO.ordinal());
     truequeRepository.save(trueque);
   }
+  public List<Trueque> listarTruequesAceptados(){return truequeRepository.findAllByEstado(EstadoTrueque.ACEPTADO.ordinal());}
 
   public List<Usuario> listarOperadoresLogisticos(){
     return usuarioRepository.findAllByRol(2);

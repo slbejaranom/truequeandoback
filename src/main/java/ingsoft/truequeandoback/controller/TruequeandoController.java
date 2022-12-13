@@ -52,4 +52,19 @@ public class TruequeandoController {
   public List<Trueque> listarTruequesHechosAUsuario(@RequestParam String email){
     return truequeandoService.listarTruequesHechosAUsuario(email);
   }
+
+  @GetMapping(RUTA_ACEPTAR_TRUEQUES)
+  public void aceptarTrueque(@RequestBody Trueque trueque){  }
+
+  @GetMapping(RUTA_CERRAR_TRUEQUE)
+  public void cerrarTrueque(Trueque trueque){}
+
+  @GetMapping(RUTA_RECHAZAR_TRUEQUE)
+  public void  cancelarTrueque(Trueque trueque){}
+
+  @GetMapping(RUTA_LISTAR_TRUEQUES_ACEPTADOS)
+  public List<Trueque> listarTruequesAceptados(){
+    return truequeandoService.listarTruequesAceptados();
+  }
+
 }

@@ -12,6 +12,8 @@ public interface TruequeRepository extends JpaRepository<Trueque, Long> {
 
   List<Trueque> findAllByUsuario1Email(String email);
 
+  List<Trueque> findAllByEstado(int estado);
+
   List<Trueque> findAllByUsuario2Email(String email);
 
   Optional<Trueque> findById(int id);
