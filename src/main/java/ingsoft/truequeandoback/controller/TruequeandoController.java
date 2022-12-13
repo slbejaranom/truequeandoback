@@ -66,7 +66,6 @@ public class TruequeandoController {
   public List<Trueque> listarTruequesAceptados(){
     return truequeandoService.listarTruequesAceptados();
   }
-
   @GetMapping(RUTA_LISTAR_CATEGORIAS)
   public List<Categoria> listarCategorias() {return truequeandoService.listarCategorias();}
 
