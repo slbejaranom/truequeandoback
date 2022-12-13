@@ -27,10 +27,7 @@ public class Elemento {
   private String nombre;
   private float peso;
   private float valor;
-
-  @Lob
-  @Type(type="org.hibernate.type.BinaryType")
-  private byte[] imagen;
+  private String imagen;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "idusuario", nullable = false)

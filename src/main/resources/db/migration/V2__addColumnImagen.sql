@@ -1,1 +1,1 @@
-alter table public.elementos add column imagen bytea null;
+alter table public.elementos add column imagen text null;
