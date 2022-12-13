@@ -1,4 +1,6 @@
 package ingsoft.truequeandoback.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 
 import lombok.Getter;
@@ -17,6 +19,7 @@ public class Categoria {
     private int id;
     private String descripcion;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "categoria",cascade = CascadeType.ALL)
     private List<Elemento> elementos;
 }
