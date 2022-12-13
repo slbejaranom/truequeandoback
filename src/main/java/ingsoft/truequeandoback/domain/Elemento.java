@@ -19,11 +19,15 @@ public class Elemento {
   private float altura;
   private float anchura;
   private float longitud;
-  private int categoria;
+  @ManyToOne
+  @JoinColumn(name = "categoria", nullable = false)
+  private Categoria categoria;
+
   private boolean estado;
   private String nombre;
   private float peso;
   private float valor;
+
   @Lob
   @Type(type="org.hibernate.type.BinaryType")
   private byte[] imagen;
