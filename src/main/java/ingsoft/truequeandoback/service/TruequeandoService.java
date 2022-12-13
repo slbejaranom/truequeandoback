@@ -1,9 +1,7 @@
 package ingsoft.truequeandoback.service;
 
-import ingsoft.truequeandoback.domain.Cliente;
-import ingsoft.truequeandoback.domain.Elemento;
-import ingsoft.truequeandoback.domain.Trueque;
-import ingsoft.truequeandoback.domain.Usuario;
+import ingsoft.truequeandoback.domain.*;
+import ingsoft.truequeandoback.repository.CategoriaRepository;
 import ingsoft.truequeandoback.repository.ElementoRepository;
 import ingsoft.truequeandoback.repository.TruequeRepository;
 import ingsoft.truequeandoback.repository.UsuarioRepository;
@@ -23,6 +21,7 @@ public class TruequeandoService {
   private final ElementoRepository elementoRepository;
   private final TruequeRepository truequeRepository;
   private final UsuarioRepository<Usuario> usuarioRepository;
+  private final CategoriaRepository categoriaRepository;
 
   public Elemento registrarElemento(Elemento elemento) {
     //generar las escepciones para error en caso que halla algo nulo
@@ -129,4 +128,17 @@ public class TruequeandoService {
   public List<Usuario> listarOperadoresLogisticos(){
     return usuarioRepository.findAllByRol(2);
   }
+
+  public List<Categoria> listarCategorias(){return  categoriaRepository.findAll();}
+
+  public Categoria agregarCategoria(Categoria categoria) {
+    //generar las escepciones para error en caso que halla algo nulo
+    // validar que el rol sea usuario
+    Optional<Categoria> categoriaOptional = categoriaRepository.findByDescripcion(categoria.getDescripcion());
+    if (categoriaOptional.isPresent()){
+      throw new IllegalArgumentException("La Categoria ya existe");
+    }
+    return categoriaRepository.save(categoria);
+  }
+
 }
