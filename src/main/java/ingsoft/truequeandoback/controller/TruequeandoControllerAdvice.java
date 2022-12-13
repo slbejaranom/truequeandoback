@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.Date;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+@EnableWebMvc
 @ControllerAdvice
 public class TruequeandoControllerAdvice {
 
@@ -15,8 +17,8 @@ public class TruequeandoControllerAdvice {
         return new ErrorDto(duplicateRequestException.getMessage(),new Date().getTime());
     }
 
-    @ExceptionHandler(IllegalAccessException.class)
-    public ErrorDto handleIllegalAccessException(IllegalAccessException illegalAccessException){
-        return new ErrorDto(illegalAccessException.getMessage(),new Date().getTime());
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ErrorDto handleIllegalAccessException(IllegalArgumentException illegalArgumentException){
+        return new ErrorDto(illegalArgumentException.getMessage(),new Date().getTime());
     }
 }
