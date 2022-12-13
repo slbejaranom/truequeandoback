@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 @Getter
 @Setter
@@ -24,6 +25,7 @@ public class Elemento {
   private float peso;
   private float valor;
   @Lob
+  @Type(type="org.hibernate.type.BinaryType")
   private byte[] imagen;
 
   @ManyToOne(fetch = FetchType.EAGER)
