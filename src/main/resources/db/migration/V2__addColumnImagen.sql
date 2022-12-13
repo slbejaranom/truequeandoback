@@ -1,0 +1,1 @@
+alter table public.elementos add column imagen bytea null;

@@ -1,5 +1,6 @@
 package ingsoft.truequeandoback.service;
 
+import ingsoft.truequeandoback.domain.Cliente;
 import ingsoft.truequeandoback.domain.Elemento;
 import ingsoft.truequeandoback.domain.Trueque;
 import ingsoft.truequeandoback.domain.Usuario;
@@ -25,6 +26,12 @@ public class TruequeandoService {
   public Elemento registrarElemento(Elemento elemento) {
     //generar las escepciones para error en caso que halla algo nulo
     // validar que el rol sea usuario
+    Optional<Usuario> usuario = usuarioRepository.findByEmail(elemento.getCliente().getEmail());
+    if (usuario.isEmpty()){
+      throw new IllegalArgumentException("El usuario no existe");
+    }
+    Usuario cliente = usuario.get();
+    elemento.setCliente((Cliente) cliente);
     elemento.setEstado(true);
     return elementoRepository.save(elemento);
   }
@@ -53,10 +60,16 @@ public class TruequeandoService {
       log.info("No se encuentra elemento 1 con id {}", trueque.getElemento2().getId());
       throw new IllegalArgumentException("No se encuentra elemento 2 con ese id");
     }
+    Optional<Usuario> usuario1 = usuarioRepository.findByEmail(trueque.getUsuario1().getEmail());
+    if (usuario1.isEmpty()){
+      throw new IllegalArgumentException("El usuario 1 no existe");
+    }
     Elemento elementoRecibido = elemento2.get();
     if (!elementoDado.isEstado() || !elementoRecibido.isEstado()) {
       throw new IllegalArgumentException("Uno de los objetos no esta disponible para trueque");
     }
+    Usuario usuarioIniciaTrueque = usuario1.get();
+    trueque.setUsuario1(usuarioIniciaTrueque);
     elementoDado.setEstado(false);
     elementoRecibido.setEstado(false);
     trueque.setElemento1(elementoDado);
@@ -80,5 +93,38 @@ public class TruequeandoService {
           throw new IllegalArgumentException("El usuario no existe");
       }
       return truequeRepository.findAllByUsuario2Email(email);
+  }
+
+  public void aceptarTrueque(Trueque trueque){
+    Optional <Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
+    if (truequeAceptado.isEmpty()){
+      throw new IllegalArgumentException("Ek trueque no existe");
+    }
+    trueque.setEstado(1);
+    truequeRepository.save(trueque);
+  }
+
+  public void cerrarTrueque(Trueque trueque){
+    Optional <Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
+    if (truequeAceptado.isEmpty()){
+      throw new IllegalArgumentException("Ek trueque no existe");
+    }
+    trueque.setEstado(2);
+    truequeRepository.save(trueque);
+  }
+
+  public void  cancelarTrueque(Trueque trueque){
+    Optional <Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
+    if (truequeAceptado.isEmpty()){
+      throw new IllegalArgumentException("Ek trueque no existe");
+    }
+    trueque.getElemento1().setEstado(true);
+    trueque.getElemento2().setEstado(true);
+    trueque.setEstado(3);
+    truequeRepository.save(trueque);
+  }
+
+  public List<Usuario> listarOperadoresLogisticos(){
+    return usuarioRepository.findAllByRol(2);
   }
 }

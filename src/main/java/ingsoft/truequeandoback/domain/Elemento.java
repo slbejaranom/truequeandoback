@@ -23,6 +23,8 @@ public class Elemento {
   private String nombre;
   private float peso;
   private float valor;
+  @Lob
+  private byte[] imagen;
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "idusuario", nullable = false)
