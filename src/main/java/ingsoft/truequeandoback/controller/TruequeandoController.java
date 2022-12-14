@@ -25,7 +25,7 @@ public class TruequeandoController {
   }
 
   @PostMapping(RUTA_REGISTRARSE_EN_SISTEMA)
-  public Usuario registrar(@RequestBody Usuario usuario) {
+  public Usuario registrar(@RequestBody Cliente usuario) {
     return servicioAutenticacion.registrar(usuario);
   }
 

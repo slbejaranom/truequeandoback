@@ -80,7 +80,7 @@ public class ServicioAutenticacion {
     return true;
   }
 
-  public Usuario registrar(Usuario usuario) {
+  public Usuario registrar(Cliente usuario) {
     // Me entra un usuario sin Id
     // SI el usuario existe, es por email, es por que ya esta registrado y no se puede repetir
     // Si no existe me crea un usuario que es guardar el usuario en la base de datos con el save User
@@ -88,7 +88,7 @@ public class ServicioAutenticacion {
     if (usuarioRegister.isPresent()) {
       throw new DuplicateRequestException("Usuario ya existe");
     }
-    return usuarioRepository.save((Cliente) usuario); // devolver Usuario
+    return usuarioRepository.save(usuario); // devolver Usuario
   }
 
   public boolean verificarAccesoPorRol(String token, String ruta) {
