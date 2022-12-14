@@ -88,8 +88,7 @@ public class ServicioAutenticacion {
     if (usuarioRegister.isPresent()) {
       throw new DuplicateRequestException("Usuario ya existe");
     }
-    usuario.setRol(1);
-    return usuarioRepository.save(usuario); // devolver Usuario
+    return usuarioRepository.save((Cliente) usuario); // devolver Usuario
   }
 
   public boolean verificarAccesoPorRol(String token, String ruta) {
