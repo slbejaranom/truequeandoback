@@ -15,7 +15,9 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.Optional;
 
+import static ingsoft.truequeandoback.utils.Constants.RUTAS_ACCESIBLES_ADMINISTRADOR;
 import static ingsoft.truequeandoback.utils.Constants.RUTAS_ACCESIBLES_CLIENTE;
+import static ingsoft.truequeandoback.utils.Constants.RUTAS_ACCESIBLES_OPERADOR_LOGISTICO;
 import static ingsoft.truequeandoback.utils.Constants.RUTAS_ACCESIBLES_TODOS;
 
 @Getter
@@ -92,8 +94,12 @@ public class ServicioAutenticacion {
     String[] tokenArgs = token.split(":");
     int rol = Integer.parseInt(tokenArgs[1]);
     switch (rol) {
+      case 0:
+        return RUTAS_ACCESIBLES_ADMINISTRADOR.contains(ruta) || RUTAS_ACCESIBLES_TODOS.contains(ruta);
       case 1:
         return RUTAS_ACCESIBLES_CLIENTE.contains(ruta) || RUTAS_ACCESIBLES_TODOS.contains(ruta);
+      case 2:
+        return RUTAS_ACCESIBLES_OPERADOR_LOGISTICO.contains(ruta) || RUTAS_ACCESIBLES_TODOS.contains(ruta);
       default:
         return false;
     }
