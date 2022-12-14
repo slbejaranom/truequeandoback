@@ -24,6 +24,7 @@ public class Constants {
   public static final String RUTA_LISTAR_TRUEQUES_ACEPTADOS = "/listartruequesaceptados";
   public static final String RUTA_LISTAR_CATEGORIAS = "/listarcategoria";
   public static final String RUTA_AGREGAR_CATEGORIA = "/agregarcategoria";
+  public static final String RUTA_LISTAR_OBJETOS_OTROS_USUARIOS = "/listarobjetosotrosusuarios";
 
   public static final Set<String> RUTAS_ACCESIBLES_TODOS = Set.of(
       RUTA_REGISTRARSE_EN_SISTEMA,
@@ -39,16 +40,18 @@ public class Constants {
       RUTA_LISTAR_TRUEQUES_HECHOS_A_USUARIO,
       RUTA_ACEPTAR_TRUEQUES,
       RUTA_RECHAZAR_TRUEQUE,
-      RUTA_LISTAR_CATEGORIAS
+      RUTA_LISTAR_CATEGORIAS,
+      RUTA_LISTAR_OBJETOS_OTROS_USUARIOS
   );
 
   public static final Set<String> RUTAS_ACCESIBLES_OPERADOR_LOGISTICO = Set.of(
-          RUTA_CERRAR_TRUEQUE
+      RUTA_LISTAR_TRUEQUES_ACEPTADOS,
+      RUTA_CERRAR_TRUEQUE
   );
 
   public static final Set<String> RUTAS_ACCESIBLES_ADMINISTRADOR = Set.of(
-          RUTA_AGREGAR_CATEGORIA,
-          RUTA_LISTAR_CATEGORIAS
+      RUTA_AGREGAR_CATEGORIA,
+      RUTA_LISTAR_CATEGORIAS
   );
 
   public static final Pattern PATRON_REGEX_TOKEN = Pattern.compile(

@@ -45,31 +45,44 @@ public class TruequeandoController {
   }
 
   @GetMapping(RUTA_LISTAR_TRUEQUES_HECHOS_POR_USUARIO)
-  public List<Trueque> listarTruequesHechosPorUsuario(@RequestParam String email){
+  public List<Trueque> listarTruequesHechosPorUsuario(@RequestParam String email) {
     return truequeandoService.listarTruequesHechosPorUsuario(email);
   }
 
   @GetMapping(RUTA_LISTAR_TRUEQUES_HECHOS_A_USUARIO)
-  public List<Trueque> listarTruequesHechosAUsuario(@RequestParam String email){
+  public List<Trueque> listarTruequesHechosAUsuario(@RequestParam String email) {
     return truequeandoService.listarTruequesHechosAUsuario(email);
   }
 
   @PutMapping(RUTA_ACEPTAR_TRUEQUES)
-  public void aceptarTrueque(@RequestBody Trueque trueque){  }
+  public void aceptarTrueque(@RequestBody Trueque trueque) {
+  }
 
   @PutMapping(RUTA_CERRAR_TRUEQUE)
-  public void cerrarTrueque(Trueque trueque){}
+  public void cerrarTrueque(Trueque trueque) {
+  }
 
   @PutMapping(RUTA_RECHAZAR_TRUEQUE)
-  public void  cancelarTrueque(Trueque trueque){}
+  public void cancelarTrueque(Trueque trueque) {
+  }
 
   @GetMapping(RUTA_LISTAR_TRUEQUES_ACEPTADOS)
-  public List<Trueque> listarTruequesAceptados(){
+  public List<Trueque> listarTruequesAceptados() {
     return truequeandoService.listarTruequesAceptados();
   }
+
   @GetMapping(RUTA_LISTAR_CATEGORIAS)
-  public List<Categoria> listarCategorias() {return truequeandoService.listarCategorias();}
+  public List<Categoria> listarCategorias() {
+    return truequeandoService.listarCategorias();
+  }
 
   @PostMapping(RUTA_AGREGAR_CATEGORIA)
-  public Categoria agregarCategoria(@RequestBody Categoria categoria){return  truequeandoService.agregarCategoria(categoria);}
+  public Categoria agregarCategoria(@RequestBody Categoria categoria) {
+    return truequeandoService.agregarCategoria(categoria);
+  }
+
+  @GetMapping(RUTA_LISTAR_OBJETOS_OTROS_USUARIOS)
+  public List<Elemento> listarObjetosQueNoSonDelUsuario(@RequestParam String email) {
+    return truequeandoService.listarObjetosOtrosUsuarios(email);
+  }
 }

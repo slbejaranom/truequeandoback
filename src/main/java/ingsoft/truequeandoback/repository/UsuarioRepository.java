@@ -1,6 +1,5 @@
 package ingsoft.truequeandoback.repository;
 
-import ingsoft.truequeandoback.domain.Elemento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ingsoft.truequeandoback.domain.Usuario;
 
