@@ -58,10 +58,10 @@ public class TruequeandoController {
   public void aceptarTrueque(@RequestBody Trueque trueque){  }
 
   @PutMapping(RUTA_CERRAR_TRUEQUE)
-  public void cerrarTrueque(Trueque trueque){}
+  public void cerrarTrueque(@RequestBody Trueque trueque){}
 
   @PutMapping(RUTA_RECHAZAR_TRUEQUE)
-  public void  cancelarTrueque(Trueque trueque){}
+  public void  cancelarTrueque(@RequestBody Trueque trueque){}
 
   @GetMapping(RUTA_LISTAR_TRUEQUES_ACEPTADOS)
   public List<Trueque> listarTruequesAceptados(){
