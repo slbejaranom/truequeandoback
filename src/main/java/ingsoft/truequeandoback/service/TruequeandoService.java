@@ -111,7 +111,7 @@ public class TruequeandoService {
       throw new IllegalArgumentException("Ek trueque no existe");
     }
     trueque.setEstado(EstadoTrueque.CERRADO.ordinal());
-    truequeRepository.save(trueque);
+    return truequeRepository.save(trueque);
   }
 
   public Trueque cancelarTrueque(Trueque trueque) {
