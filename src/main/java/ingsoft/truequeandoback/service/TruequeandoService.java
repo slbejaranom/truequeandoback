@@ -6,6 +6,7 @@ import ingsoft.truequeandoback.repository.ElementoRepository;
 import ingsoft.truequeandoback.repository.TruequeRepository;
 import ingsoft.truequeandoback.repository.UsuarioRepository;
 import ingsoft.truequeandoback.service.enums.EstadoTrueque;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -93,7 +94,11 @@ public class TruequeandoService {
     if (usuario.isEmpty()) {
       throw new IllegalArgumentException("El usuario no existe");
     }
-    return truequeRepository.findAllByUsuario2Email(email);
+    return truequeRepository
+        .findAllByUsuario2Email(email)
+        .stream()
+        .filter(trueque -> trueque.getEstado() == 0)
+        .collect(Collectors.toList());
   }
 
   public Trueque aceptarTrueque(Trueque trueque) {
