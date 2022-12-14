@@ -2,14 +2,14 @@ package ingsoft.truequeandoback.controller;
 
 import com.sun.jdi.request.DuplicateRequestException;
 import ingsoft.truequeandoback.controller.dto.ErrorDto;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.Date;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @EnableWebMvc
-@ControllerAdvice
+@RestControllerAdvice
 public class TruequeandoControllerAdvice {
 
     @ExceptionHandler(DuplicateRequestException.class)
