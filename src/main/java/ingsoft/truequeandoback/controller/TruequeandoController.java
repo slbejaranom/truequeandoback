@@ -60,21 +60,15 @@ public class TruequeandoController {
   }
 
   @PutMapping(RUTA_CERRAR_TRUEQUE)
-<<<<<<< Updated upstream
-  public Trueque cerrarTrueque(Trueque trueque) {
+  public Trueque cerrarTrueque(@RequestBody Trueque trueque) {
     return truequeandoService.cerrarTrueque(trueque);
   }
 
   @PutMapping(RUTA_RECHAZAR_TRUEQUE)
-  public Trueque cancelarTrueque(Trueque trueque) {
+  public Trueque cancelarTrueque(@RequestBody Trueque trueque){
     return truequeandoService.cancelarTrueque(trueque);
   }
-=======
-  public void cerrarTrueque(@RequestBody Trueque trueque){}
 
-  @PutMapping(RUTA_RECHAZAR_TRUEQUE)
-  public void  cancelarTrueque(@RequestBody Trueque trueque){}
->>>>>>> Stashed changes
 
   @GetMapping(RUTA_LISTAR_TRUEQUES_ACEPTADOS)
   public List<Trueque> listarTruequesAceptados() {
