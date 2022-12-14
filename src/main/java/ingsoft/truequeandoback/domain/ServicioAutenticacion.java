@@ -38,7 +38,7 @@ public class ServicioAutenticacion {
       Usuario usuarioLogin = usuario.get();
       if (usuarioLogin.getPassword().equals(password)) {
         TokenDTO token = generarTokenDto(usuarioLogin);
-        token.setTiempoExpiracion(timeExpiration*1000);
+        token.setTiempoExpiracion(timeExpiration * 1000);
         token.setUsuario(usuarioLogin);
         token.setActivo(true);
         token.setTimestampGeneracion(new Date().getTime());
@@ -58,9 +58,9 @@ public class ServicioAutenticacion {
 
   public void cancelarToken(TokenDTO tokenDTO) {
     if (tokenDTO.isActivo()) {
-        tokenDTO.setActivo(false);
-        tokenRepository.save(tokenDTO);
-      }
+      tokenDTO.setActivo(false);
+      tokenRepository.save(tokenDTO);
+    }
   }
 
   public boolean verificarTokenActivo(TokenDTO tokenDTO) {
@@ -69,10 +69,11 @@ public class ServicioAutenticacion {
       return false;
     }
     TokenDTO tokenValidar = tokenBuscado.get();
-    if(!tokenValidar.isActivo()){
+    if (!tokenValidar.isActivo()) {
       return false;
     }
-    if(new Date().getTime() > tokenValidar.getTimestampGeneracion()+tokenValidar.getTiempoExpiracion()){
+    if (new Date().getTime()
+        > tokenValidar.getTimestampGeneracion() + tokenValidar.getTiempoExpiracion()) {
       cancelarToken(tokenValidar);
       return false;
     }
@@ -87,7 +88,8 @@ public class ServicioAutenticacion {
     if (usuarioRegister.isPresent()) {
       throw new DuplicateRequestException("Usuario ya existe");
     }
-      return usuarioRepository.save(usuario); // devolver Usuario
+    usuario.setRol(1);
+    return usuarioRepository.save(usuario); // devolver Usuario
   }
 
   public boolean verificarAccesoPorRol(String token, String ruta) {
@@ -95,11 +97,13 @@ public class ServicioAutenticacion {
     int rol = Integer.parseInt(tokenArgs[1]);
     switch (rol) {
       case 0:
-        return RUTAS_ACCESIBLES_ADMINISTRADOR.contains(ruta) || RUTAS_ACCESIBLES_TODOS.contains(ruta);
+        return RUTAS_ACCESIBLES_ADMINISTRADOR.contains(ruta) || RUTAS_ACCESIBLES_TODOS.contains(
+            ruta);
       case 1:
         return RUTAS_ACCESIBLES_CLIENTE.contains(ruta) || RUTAS_ACCESIBLES_TODOS.contains(ruta);
       case 2:
-        return RUTAS_ACCESIBLES_OPERADOR_LOGISTICO.contains(ruta) || RUTAS_ACCESIBLES_TODOS.contains(ruta);
+        return RUTAS_ACCESIBLES_OPERADOR_LOGISTICO.contains(ruta)
+            || RUTAS_ACCESIBLES_TODOS.contains(ruta);
       default:
         return false;
     }
