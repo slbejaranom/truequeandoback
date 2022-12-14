@@ -96,16 +96,16 @@ public class TruequeandoService {
     return truequeRepository.findAllByUsuario2Email(email);
   }
 
-  public void aceptarTrueque(Trueque trueque) {
+  public Trueque aceptarTrueque(Trueque trueque) {
     Optional<Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
     if (truequeAceptado.isEmpty()) {
       throw new IllegalArgumentException("El trueque no existe");
     }
     trueque.setEstado(EstadoTrueque.ACEPTADO.ordinal());
-    truequeRepository.save(trueque);
+    return truequeRepository.save(trueque);
   }
 
-  public void cerrarTrueque(Trueque trueque) {
+  public Trueque cerrarTrueque(Trueque trueque) {
     Optional<Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
     if (truequeAceptado.isEmpty()) {
       throw new IllegalArgumentException("Ek trueque no existe");
@@ -114,7 +114,7 @@ public class TruequeandoService {
     truequeRepository.save(trueque);
   }
 
-  public void cancelarTrueque(Trueque trueque) {
+  public Trueque cancelarTrueque(Trueque trueque) {
     Optional<Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
     if (truequeAceptado.isEmpty()) {
       throw new IllegalArgumentException("EL trueque no existe");
@@ -122,7 +122,7 @@ public class TruequeandoService {
     trueque.getElemento1().setEstado(true);
     trueque.getElemento2().setEstado(true);
     trueque.setEstado(EstadoTrueque.RECHAZADO.ordinal());
-    truequeRepository.save(trueque);
+    return truequeRepository.save(trueque);
   }
 
   public List<Trueque> listarTruequesAceptados() {
