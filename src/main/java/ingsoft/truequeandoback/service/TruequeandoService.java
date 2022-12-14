@@ -70,6 +70,7 @@ public class TruequeandoService {
     }
     Usuario usuarioIniciaTrueque = usuario1.get();
     trueque.setUsuario1(usuarioIniciaTrueque);
+    trueque.setUsuario2(elementoRecibido.getCliente());
     elementoDado.setEstado(false);
     elementoRecibido.setEstado(false);
     trueque.setElemento1(elementoDado);
