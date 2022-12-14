@@ -55,15 +55,18 @@ public class TruequeandoController {
   }
 
   @PutMapping(RUTA_ACEPTAR_TRUEQUES)
-  public void aceptarTrueque(@RequestBody Trueque trueque) {
+  public Trueque aceptarTrueque(@RequestBody Trueque trueque) {
+    return truequeandoService.aceptarTrueque(trueque);
   }
 
   @PutMapping(RUTA_CERRAR_TRUEQUE)
-  public void cerrarTrueque(Trueque trueque) {
+  public Trueque cerrarTrueque(Trueque trueque) {
+    return truequeandoService.cerrarTrueque(trueque);
   }
 
   @PutMapping(RUTA_RECHAZAR_TRUEQUE)
-  public void cancelarTrueque(Trueque trueque) {
+  public Trueque cancelarTrueque(Trueque trueque) {
+    return truequeandoService.cancelarTrueque(trueque);
   }
 
   @GetMapping(RUTA_LISTAR_TRUEQUES_ACEPTADOS)
