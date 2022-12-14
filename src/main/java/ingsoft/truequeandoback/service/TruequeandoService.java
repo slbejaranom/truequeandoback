@@ -124,6 +124,15 @@ public class TruequeandoService {
     if (truequeAceptado.isEmpty()) {
       throw new IllegalArgumentException("EL trueque no existe");
     }
+    Optional<Elemento> elemento1 = elementoRepository.findById(trueque.getElemento1().getId());
+    Optional<Elemento> elemento2 = elementoRepository.findById(trueque.getElemento2().getId());
+    if(elemento1.isEmpty() || elemento2.isEmpty()){
+      throw new IllegalArgumentException("Alguno de los elementos no existe");
+    }
+    Elemento elementoDado = elemento1.get();
+    Elemento elementoRecibido = elemento2.get();
+    trueque.setElemento1(elementoDado);
+    trueque.setElemento2(elementoRecibido);
     trueque.getElemento1().setEstado(true);
     trueque.getElemento2().setEstado(true);
     trueque.setEstado(EstadoTrueque.RECHAZADO.ordinal());
