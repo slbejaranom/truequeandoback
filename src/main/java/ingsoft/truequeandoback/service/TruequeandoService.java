@@ -27,7 +27,7 @@ public class TruequeandoService {
     //generar las escepciones para error en caso que halla algo nulo
     // validar que el rol sea usuario
     Optional<Usuario> usuario = usuarioRepository.findByEmail(elemento.getCliente().getEmail());
-    if (usuario.isEmpty()){
+    if (usuario.isEmpty()) {
       throw new IllegalArgumentException("El usuario no existe");
     }
     Usuario cliente = usuario.get();
@@ -61,7 +61,7 @@ public class TruequeandoService {
       throw new IllegalArgumentException("No se encuentra elemento 2 con ese id");
     }
     Optional<Usuario> usuario1 = usuarioRepository.findByEmail(trueque.getUsuario1().getEmail());
-    if (usuario1.isEmpty()){
+    if (usuario1.isEmpty()) {
       throw new IllegalArgumentException("El usuario 1 no existe");
     }
     Elemento elementoRecibido = elemento2.get();
@@ -87,35 +87,35 @@ public class TruequeandoService {
     return truequeRepository.findAllByUsuario1Email(email);
   }
 
-  public List<Trueque> listarTruequesHechosAUsuario(String email){
-      Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
-      if (usuario.isEmpty()) {
-          throw new IllegalArgumentException("El usuario no existe");
-      }
-      return truequeRepository.findAllByUsuario2Email(email);
+  public List<Trueque> listarTruequesHechosAUsuario(String email) {
+    Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+    if (usuario.isEmpty()) {
+      throw new IllegalArgumentException("El usuario no existe");
+    }
+    return truequeRepository.findAllByUsuario2Email(email);
   }
 
-  public void aceptarTrueque(Trueque trueque){
-    Optional <Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
-    if (truequeAceptado.isEmpty()){
+  public void aceptarTrueque(Trueque trueque) {
+    Optional<Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
+    if (truequeAceptado.isEmpty()) {
       throw new IllegalArgumentException("El trueque no existe");
     }
     trueque.setEstado(EstadoTrueque.ACEPTADO.ordinal());
     truequeRepository.save(trueque);
   }
 
-  public void cerrarTrueque(Trueque trueque){
-    Optional <Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
-    if (truequeAceptado.isEmpty()){
+  public void cerrarTrueque(Trueque trueque) {
+    Optional<Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
+    if (truequeAceptado.isEmpty()) {
       throw new IllegalArgumentException("Ek trueque no existe");
     }
     trueque.setEstado(EstadoTrueque.CERRADO.ordinal());
     truequeRepository.save(trueque);
   }
 
-  public void  cancelarTrueque(Trueque trueque){
-    Optional <Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
-    if (truequeAceptado.isEmpty()){
+  public void cancelarTrueque(Trueque trueque) {
+    Optional<Trueque> truequeAceptado = truequeRepository.findById(trueque.getId());
+    if (truequeAceptado.isEmpty()) {
       throw new IllegalArgumentException("EL trueque no existe");
     }
     trueque.getElemento1().setEstado(true);
@@ -123,22 +123,36 @@ public class TruequeandoService {
     trueque.setEstado(EstadoTrueque.RECHAZADO.ordinal());
     truequeRepository.save(trueque);
   }
-  public List<Trueque> listarTruequesAceptados(){return truequeRepository.findAllByEstado(EstadoTrueque.ACEPTADO.ordinal());}
 
-  public List<Usuario> listarOperadoresLogisticos(){
+  public List<Trueque> listarTruequesAceptados() {
+    return truequeRepository.findAllByEstado(EstadoTrueque.ACEPTADO.ordinal());
+  }
+
+  public List<Usuario> listarOperadoresLogisticos() {
     return usuarioRepository.findAllByRol(2);
   }
 
-  public List<Categoria> listarCategorias(){return  categoriaRepository.findAll();}
+  public List<Categoria> listarCategorias() {
+    return categoriaRepository.findAll();
+  }
 
   public Categoria agregarCategoria(Categoria categoria) {
     //generar las escepciones para error en caso que halla algo nulo
     // validar que el rol sea usuario
-    Optional<Categoria> categoriaOptional = categoriaRepository.findByDescripcion(categoria.getDescripcion());
-    if (categoriaOptional.isPresent()){
+    Optional<Categoria> categoriaOptional = categoriaRepository.findByDescripcion(
+        categoria.getDescripcion());
+    if (categoriaOptional.isPresent()) {
       throw new IllegalArgumentException("La Categoria ya existe");
     }
     return categoriaRepository.save(categoria);
   }
 
+  public List<Elemento> listarObjetosOtrosUsuarios(String email) {
+    Optional<Usuario> usuarioBuscado = usuarioRepository.findByEmail(email);
+    if (usuarioBuscado.isEmpty()) {
+      throw new IllegalArgumentException("El usuario indicado no existe");
+    }
+    Usuario usuarioEncontrado = usuarioBuscado.get();
+    return elementoRepository.findAllElementosQueNoPertenecenAlUsuario(usuarioEncontrado.getId());
+  }
 }
