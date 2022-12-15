@@ -153,10 +153,6 @@ public class TruequeandoService {
     return truequeRepository.findAllByEstado(EstadoTrueque.ACEPTADO.ordinal());
   }
 
-  public List<Usuario> listarOperadoresLogisticos() {
-    return usuarioRepository.findAllByRol(2);
-  }
-
   public List<Categoria> listarCategorias() {
     return categoriaRepository.findAll();
   }

@@ -9,6 +9,4 @@ import java.util.Optional;
 public interface UsuarioRepository<T extends Usuario> extends JpaRepository<T, Integer> {
   Optional<Usuario> findById(int id);
   Optional<T> findByEmail(String email);
-
-  List<Usuario> findAllByRol(int rol);
 }
