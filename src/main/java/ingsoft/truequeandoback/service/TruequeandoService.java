@@ -69,6 +69,16 @@ public class TruequeandoService {
     if (!elementoDado.isEstado() || !elementoRecibido.isEstado()) {
       throw new IllegalArgumentException("Uno de los objetos no esta disponible para trueque");
     }
+    Optional<Usuario> primerOperadorLogistico = usuarioRepository
+        .findAll()
+        .stream()
+        .filter(usuario -> usuario.getRol() == 2)
+        .findFirst();
+    if(primerOperadorLogistico.isEmpty()){
+      throw  new IllegalArgumentException("No existe operador logístico, registre uno antes de realizar el trueque");
+    }
+    OperadorLogistico transportador = (OperadorLogistico) primerOperadorLogistico.get();
+    trueque.setTransportador(transportador);
     Usuario usuarioIniciaTrueque = usuario1.get();
     trueque.setUsuario1(usuarioIniciaTrueque);
     trueque.setUsuario2(elementoRecibido.getCliente());
